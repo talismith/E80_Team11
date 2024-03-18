@@ -1,7 +1,0 @@
----
-title: "Lab 4 Submission Sheet"
-toc: false
-format:
-  html: default
-  docx: default
----

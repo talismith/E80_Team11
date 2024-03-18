@@ -1,4 +1,0 @@
----
-title: "Project Specifications"
-toc: false
----
