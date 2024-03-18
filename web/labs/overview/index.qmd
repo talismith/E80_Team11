@@ -1,0 +1,78 @@
+---
+title: "Lab Overview"
+---
+
+Lab manuals are linked here.
+
+* Note that the project is sub-divided into six parts as described below.   
+* Deliverables for each lab and the project are detailed on their individual pages.
+* Note that in weeks 6 and 7, the order of Lectures/quiz/Lab are not the same for everyone. Odd numbered teams (11, 23, etc.) do different work than Even numbered teams (12, 24, etc.). **Please make sure prelab is done for the correct lab.**
+
+# Labs
+
+
+| Week             | (Odd numbered teams) | (Even numbered teams) |
+|------------------|----------------------|-----------------------|
+| **1** (1/16-1/19)|  [Lab 0:<br>Tutorial and Skill Review](/labs/lab0)     |  [Lab 0:<br>Tutorial and Skill Review](/labs/lab0)  |
+| **2** (1/22-1/26)|  [Lab 1:<br>Go Autonomous](/labs/lab1)                 |  [Lab 1:<br>Go Autonomous](/labs/lab1)  |
+| **3** (1/29-2/2) |  [Lab 2:<br>Basic Electrical Measurements](/labs/lab2) |  [Lab 2:<br>Basic Electrical Measurements](/labs/lab2)  |
+| **4** (2/5-2/9)  |  [Lab 3:<br>Op Amps and Marine Sensors](/labs/lab3)    |  [Lab 3:<br>Op Amps and Marine Sensors](/labs/lab3)  |
+| **5** (2/12-2/16)|  [Lab 4:<br>Temperature Sensors](/labs/lab4)           |  [Lab 4:<br>Temperature Sensors](/labs/lab4)  |
+| **6** (2/19-2/23)|  [Lab 5:<br>Underwater Acoustics](/labs/lab5)          |  [Lab 6:<br>Fluid Mechanics](/labs/lab6)  |
+| **7** (2/26-3/1) |  [Lab 6:<br>Fluid Mechanics](/labs/lab6)               |  [Lab 5:<br>Underwater Acoustics](/labs/lab5)  |
+| **8** (3/4-3/8)  |  [Project Proposal Week](/project/proposal)            | [Project Proposal Week](/project/proposal)
+| **9** (3/11-3/15)|  **Spring Break**  |  
+
+__________
+- **Saturday 4/20/2024**   <br>Relaunch at Dana Point<br>**ALL STUDENTS ARE EXPECTED TO ATTEND THE SATURDAY LAUNCH**
+
+- **Wednesday 5/1/2024**   <br>**PROJECT PRESENTATION FOR ALL GROUPS**
+
+
+
+
+
+# Safety Rules in E80
+
+## General rules
+- No eating or drinking in lab. If necessary you may leave lab, wash your hands, eat and/or drink something outside the lab, wash your hands, return to lab.
+- Know the location of fire extinguisher, eye wash, safety shower and quickest escape route.
+- Notify instructor immediately after _any_ injury, fire, spills or breakage.
+- Clean lab bench and turn off equipment before leaving. Leave the bench power on.
+- Electricity and water DO NOT MIX –a lot of water is involved in E80 – be mindful at all times.
+
+## Proper attire
+- Closed-toe shoes
+- Short sleeves preferred, rolled-up long sleeves acceptable
+- Long pants
+- No dangling jewelry – no rings, bracelets, necklaces or earrings
+- Loose clothing must be secured away from work (including hoody draw strings)
+- Long hair pulled back and secured
+- For field experiences:
+  - Location-appropriate footwear and clothing
+  - Appropriate PPE (including floatation devices for boats)
+  - Sunscreen
+  - Hydration
+
+## Chemical safety: epoxies and CA (CyanoAcrylate aka superglue)
+- Safety goggles
+- Gloves
+- If procedure emits fumes, then must be done in a fume hood or out of doors away from buildings
+
+## Soldering
+- Iron must be turned off when not in your hand.
+- Use recently soaked sponge. Use spray bottle to moisten. Never use sink or water fountain.
+- Use fume extractor: fume from rosin in solder is a respiratory irritant.
+- Wash hands after handling solder – solder is 40% lead.  Skin contact is harmless, but ingestion can occur with unwashed hands when eating, drinking, or smoking.
+
+# Lab Practices
+
+## Deliverables
+A submission sheet is due at the end of each 4-hour lab period. The submission sheet must be uploaded before the end of your lab session at 5:15 pm. Note that only **ONE** member of each team should access and submit the submission sheet. It is the responsibility of that team member to add the rest of the team’s names to the submission sheet. 
+
+## Hardware checkout
+You will work with some expensive hardware in this class. Expensive hardware like motherboards and batteries must be explicitly checked out from a professor or proctor so that we can track where it is. If any hardware that you checked out breaks,  you will need to request a replacement from a professor. You make this request by filling out an [error report](https://drive.google.com/open?id=1FnHDzDSCuc3pAsEXzUg6BnTacfLF-ODs) (paper copies will be in lab). This report needs to be well thought out; professors will reject reports that don't represent sufficient testing or thought. You will keep this hardware with you throughout the semester in your storage box. 
+
+
+## SAFETY QUESTIONs
+Labs will include callout boxes labeled "SAFETY QUESTION: the question text".  ALL group members must be able to answer these questions before the lab.  Failing to understand the SAFETY QUESTIONs can damage equipment or harm lab users.  You should always feel empowered to stop work and grab an instructor if you find a safety question that makes you unsure.

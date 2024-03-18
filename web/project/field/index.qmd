@@ -1,0 +1,48 @@
+---
+title: "E80 Project Field Deployments"
+---
+
+**UNDER CONSTRUCTION**
+
+Checklists
+Ground truths
+Calibrations
+
+## Week 4: First Field Deployment Data
+
+During the fourth week you need to demonstrate that your AUV is watertight and capable of autonomous operation by measuring field data with it. Because GPS reception in the tank room is poor we'll accept faked control loops or open loop control during tank room deployments. You are expected to test and (hopefully) launch your AUV at the pHake Lake at the Bernard Field Station during your regular section time. The main goal of these tests is to ensure that your sensors work in the field. The secondary goal is to evaluate your experimental data so you can make changes to ensure that you will be able to meet your experimental goals. Do not forget that seawater and lake water have very different salinities, conductivities, and densities. A neutrally buoyant AUV in pHake Lake will bob like a cork in the ocean.
+
+Remember that field deployments are often easier if you have a deployment checklist, so write one. Here is an [example deployment checklist](https://drive.google.com/open?id=1MWqGn4acs9HfsRtGSR8tZrp-E_IN6IH4). The intent is that this checklist will prevent mistakes during your deployment; you'll be thinking about enough things out in the field that you are very likely to forget about the details of the care and feeding of your sensor suite without a list to check against. 
+
+You will also submit an experimental plan. The plan must include the number of deployments you intend to do and the times and locations of those deployments. You should list the expected range of signals you expect to observe (based on theory or preliminary measurements) during the deployments. The document should show the planned robot trajectory for each deployment and discuss how the robot will be recovered (kayak, it comes back and we grab it, pool hook, etc.). 
+
+The main E80 Lab (Parsons B171) will be open from 12:30 pm - 1:00 pm this week so that you may retrieve your equipment. You must be at the [side gate](https://drive.google.com/file/d/1wdGyp2_50KINmBhqCJby9zoKUE3Mr1cf/view?usp=sharing) of Bernard Field Station by 1:15 pm; an instructor will meet the group at the gate at the start of your section.  The teaching team will be out at BFS. This is one of the two chances that you'll have to collect data in the field, and field data is required for your final report and presentation. 
+
+Tools and facilities will be available at BFS. A generator will be running power supplies, oscilloscopes, soldering irons, and other electronics. Multimeters and common hand tools will be available. Common supplies will be available too: heat shrink, glue, hot air guns, etc. A set of work tables will be set up beneath shaded tents. Sunscreen and water will be available during this deployment, but be sure you've eaten before you arrive. Faculty will announce a cancellation of the launch in the case of severe rain. Be sure to walk to the BFS gate in pairs and only cross at crosswalks.
+
+You should show slides containing analyzed data at your checkoff. Be sure to overlay data sets that should be compared against one another and include analytical models to compare against on your plots.
+
+NOTE: It is possible to increase the logging time of your robot by increasing the FILE_BLOCK_COUNT value in Logger.h. This can help you to log data during long deployments.
+
+
+## Week 5: Final Field Deployment Data
+
+The fifth week is your final chance to test and verify your deployment checklist and fix any flaws that were discovered at pHake Lake. You will have your regular section time to rebuild, retest, and modify your system to get more meaningful data by adjusting such things as amplifier gains and offsets, sampling rate, sensor location on the AUV, and deployment times of your sensor. You will not have access to pHake Lake, but you will have access to the water tank during the week.
+
+The final field deployment is on Saturday, 4/22/2023. We will take buses from Foothill Blvd just north of Parsons to Dana Point, leaving at 6:30 am sharp. If you miss the bus, you will have to find your own way to Dana Point.
+
+You must have your robot and any supplies that your group plans to bring with you in order to be ready to load the bus. Attendance will be taken to ensure that the bus doesn't leave anyone behind at the end of the day, so make sure you are counted in the morning and you tell us if you are leaving separately from the bus.
+
+Sunscreen, water and some snack/lunch food (pizza, granola bars, chips) will be provided. The same facilities as the lake deployment will be available. In addition, we will provide freshwater buckets and rice for recovering flooded robots.
+
+Faculty will announce a cancellation of the launch in the case of severe rain. The launch may be rescheduled for Sunday in that case.
+
+Videos have been recorded to give students a sense of the following environment characteristics:
+
+
+* Water outside the harbor: Exercise great care if you want to operate a robot here. Most AUVs will be trashed. Watch this [video](https://drive.google.com/file/d/0BwiB3SVueuOpV05GVWgtaV9tMFk/view?usp=sharing&resourcekey=0-01dqmgvU3OkorvewX5pyyw).
+* Currents close to docks: This [video](https://drive.google.com/file/d/0BwiB3SVueuOpUmVjWnM2RUZ6OWM/view?usp=sharing&resourcekey=0-Gw-EZ0-FcsKywoIa2LI3lA) shows the worst I saw. In this video, no motors are turned on.
+* Normal AUV navigation in the harbor: This [video](https://drive.google.com/file/d/0BwiB3SVueuOpa2oyTURlUVFmVkk/view?usp=sharing&resourcekey=0-3BT_e71MRrCcpbY7x37i3w) shows it is possible.
+* Water clarity: Get an idea of what you can see by watching this [video](https://drive.google.com/file/d/1D0d_-GQWR-jZdyS6DVEm35iIVWuAI0Vb/view?usp=sharing).
+
+Your deliverables are slides with updated data from your deployment, which you will share with your instructors during your checkoffs at Dana Point. You are not allowed to do any deployments after launch day, so use this week well!

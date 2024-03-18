@@ -1,0 +1,31 @@
+---
+title: "E80 Project Build, Test and Integration"
+---
+
+**UNDER CONSTRUCTION**
+
+## Week 2: Breadboard Demonstration
+
+At the end of the second week of the project you must demonstrate a prototype of your sensors in communication with the Teensy on the motherboard (MTB). Attach the sensors to your MTB (possibly using a breadboard), write software to measure them and design a set of experiments which will allow a professor to observe your sensor's outputs for known values. Be mindful of your construction techniques: if you do a good job building your circuits this week then you will be ready for your deployments. If you do a bad job, then you will need to do confusing rebuilds. The more sensors you get working this week, the smoother next week will go.
+
+During your checkoff you will be expected to show your professor (preferably) a live demonstration or (if necessary) a set of slides which show your measured data.
+
+Here is a [PDF of the Week 2 check-off list](https://drive.google.com/file/d/1ceVcYtdJ0_ELad29IEuRvf-lKeLMVVRf/view?usp=sharing) that we will use to evaluate your circuits.
+
+
+## Week 3: PCB Solder and Test
+
+After you have tested all of your sensors (possibly breadboarded) and demonstrated that they work, you need to transfer them to the hardware that will go in your AUV. As discussed in Section 1 above, the available protoboards are PC boards that are laid out like two halves of a breadboard side by side to which you can solder parts. They connect to the motherboard through the multipin connectors and ribbon cable. They are usually the easiest way to ruggedly mount your components for use in your AUV. Consider carefully the proper ways to mount and waterproof so that your sensors function as desired. You do not need to complete your waterproofing and final assembly, but everything should be ruggedly mounted and you want to come as close to the final configuration as possible.
+
+Some helpful guidelines:
+
+* Parts like the bypass capacitors and assorted resistors should be soldered directly to the PCB. For more complex parts, such as 16-pin DIP op-amps, it may be wise to solder a socket in place and mount the part in the socket to facilitate replacing them if something goes wrong. 
+* Note that there are special areas on the protoboard layout for voltage regulators; you have battery power available to your protoboard but no regulated voltage supplies, so you will need to use these areas to add voltage regulators. The screw holes on all of the boards are grounded. Connections from the motherboard to protoboard will be made with a ribbon cable as shown [here](https://drive.google.com/open?id=1f263XprRhunVb96iLlj4cgUdvQr9Ukla) and [here](https://drive.google.com/open?id=1CA02afMMaOq7no6tP6REE3O2E691qiza).
+* Good wiring technique and tight layout will make your robot much more reliable and easier to debug. 
+* You should use stranded wire whenever the wire will be subject to flexure or bending during use, disassembly or reassembly. It is much less likely to break under strain than solid core wire. As a general rule, when connecting two points on the protoboard use solid wire, when connecting to anything off board, use stranded wire.
+* You may need to make penetrator bolts for this project stage. A method for applying marine epoxy to bolts that have been drilled out can be found [here](https://drive.google.com/file/d/0BwiB3SVueuOpc2JIeUl1Z3ktU2M/view?usp=sharing&resourcekey=0-3E2w3qqP6SJLheveTlKGJQ). Remember that marine epoxy needs to dry overnight, so making these bolts requires two days because epoxy is applied twice. Be sure epoxy always dries in a fume hood: staff can show you an appropriate hood to use. We use 1/4" holes for our penetrator bolts and we hold the undrilled bolts in vises while drilling out the central hole. We find that six wires is about the maximum that we can fit into one bolt before the epoxy starts failing. You will also need to drill holes for these penetrator bolts in your project box. Be sure to use 1/2" [step drill bits](https://www.amazon.com/Step-Drill-Bits/b?ie=UTF8&node=256287011) (which we have in our cupboards) to drill out the holes. Standard drill bits will result in ragged holes that are not watertight.
+* [Default_Robot.ino](https://github.com/HMC-E80/E80-SP2023/blob/main/Default_Robot/Default_Robot.ino), is a good starting point for integrating your sensors with the Teensy. It adds some implements a couple features: logging of the analog pins, an updated diagnostic display, improved GPS resolution, and a few header files that help keep things organized. Be sure to read the README because it contains a lot of information about the features and adjustable knobs in each file. The adjustments described in the README file are sufficient to cover most standard student projects.
+
+During your checkoff, you will be expected to explain to your professor how everything is intended to work, and (preferably) give your professor a live demonstration of data collection and display or (if necessary) display a set of slides which shows your measured data. The difference from Week 2 is that everything should be mounted, and not just breadboarded. You should be able to mount your electronics assembly in your box, power it from battery power, mount the box in your robot and demonstrate the ability to log data when it is in this configuration. Any mechanical modifications to the robot should be complete before the checkoff so that the instructors are verifying that your electronics assembly can be mounted inside of the final version of your robot.
+
+Here is a [PDF of the Week 3 check-off list](https://drive.google.com/file/d/1D4dGdl3dXKTcIKknPj-1_9rpzKQ1UMyt/view?usp=sharing) that we will use to evaluate your protoboards.

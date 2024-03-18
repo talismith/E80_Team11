@@ -1,0 +1,60 @@
+---
+title: "E80 Project Presentation and Report"
+---
+
+**UNDER CONSTRUCTION**
+
+## Week 6: Data Analysis and Preparation for Report and Presentation
+
+There are no deliverables during the sixth week of the project, but professors will be available to help you analyze data from your robot deployments. The experiments that you may conduct are limited, and the spirit of the restrictions is that you may only conduct small, in-lab forensic experiments to figure out problems if things went wrong.  
+
+Specifically:
+
+* You may not take any measurements underwater; you're confined to "lab."
+* You may not build or measure new sensors: if it didn't work during a deployment then we're not interested in measurements from it.
+
+You should focus your efforts on analyzing your data and forensic analysis of failures in your sensors. If a small experiment would verify a forensic assumption or explain a quirk in your data, then you should feel free to carry it out. (For example, a team once needed to see how their measurements from an LED varied with angle, and they took their still functional sensor outside and waved it around to take that measurement.) When in doubt, ask an instructor. 
+
+Your report is due at the end of this week.
+
+
+## Final Presentation
+
+On presentation day you will give a fifteen-minute, in-person presentation followed by ten minutes of questions and answers. This presentation should be aimed at a technically competent audience with diverse training backgrounds that is unfamiliar with the details of your project. (e.g.: The audience is a group of professional engineers from different disciplines.)  You should imagine the presentation is being given to employers or peers at a conference, which means that you should hold yourself to high standards of professionalism: practice until the presentation is smooth and well-polished, think carefully about the story your visual aids are telling, ensure that the visual aids are readable and high quality, and dress in [traditional business](http://www.casualpower.com/business_casual_tips/biz_attire.html) or [business casual](http://www.wisegeek.org/what-is-meant-by-business-casual-dress.htm) clothing. Every member of the team should participate in the presentation.
+
+[Here](https://docs.google.com/document/d/1gkcIFf0QWzm_AHsSfehlXYAj7xqv3sbh/edit?usp=share_link&ouid=105511935419108795487&rtpof=true&sd=true) is the rubric.
+
+Successful presentations often include discussions of: 
+
+* Science and/or engineering goals
+* Sensors and mechanical modifications to achieve those goals
+* Design process and calculations
+* Pre-deployment modeling and expected measurements
+* Data processing
+* Comparisons between modeling and measured data
+* Interpretation of these results
+* Recommendations for future work
+
+The questions during the Q&A portion of your presentation will come from both the general technical audience and your instructors. They will range from straightforward to very detailed. Be sure to prepare by practicing fielding pointed questions and by cultivating a comprehensive understanding of your work. Preparing supplementary slides which you can deploy for common questions can help you during the Q&A.
+
+
+The presentation schedule is available [here](https://docs.google.com/document/d/1PCoDuY3R-H8rUWIGGK-2glUJ2HQdZG8_AiqCY1jNEt4/edit?usp=share_link).
+Please be at least ten minutes early to your presentation.  
+
+
+
+## Final Report
+
+Each team is responsible for submitting a report on their deployments in IEEE format. The report has a maximum length of ten pages including figures and appendices. Your purpose is to convey your experiments, your apparatus and your results. You should assume your audience is made of technical professionals of diverse backgrounds (i.e.: not all instructors of the course) who are unfamiliar with your specific project. You should write the report such that a reader could replicate your experiment and compare their results to yours. Note that this is a different audience than the video presentation. [This rubric](https://docs.google.com/document/d/1BHVDvYdrbAWmpzs2dTNIYQB6RqpNgbVk/edit?usp=share_link&ouid=105511935419108795487&rtpof=true&sd=true) is the rubric which will be used to grade the reports.   
+
+Here are a few tips for good report writing:
+
+* The main body is often most digestible if it is written in several sections. Which sections are included and the ordering of your will depend on the specifics of the experiment, but some common, important topics are provided in the modified rubric. If it is impossible to address every point in the modified rubric while staying inside the page limit then (1) make your writing more compact by using mathematical notation, tables or figures and (2) prioritize what is most important for your report. 
+* Be sure to follow the practices of scientific writing: use quantifiable descriptions instead of vague adjectives ("a 25% change" instead of a "a big change"), make sure all plots have labeled axes with units, make sure text in figures and tables is large enough to read, don't use the first person (including cheats like "the team did X") and minimize passive voice by making the experiment or artifact the subject of your sentences.
+* Make sure to do some pre-writing to organize your text. Decide what topics you want in the report and where you want to put them before you start writing. Don't talk about topics in the wrong sections or repeat yourself unnecessarily.
+* Don't forget that your writing style has a huge impact on how your work is received. Make a careful editing pass to be sure that each sentence says what you mean it to say. Then make a second editing pass for spelling, punctuation, common grammatical errors (especially tense mismatch, which is endemic), and gracefulness of language.
+
+Here are [some examples](https://drive.google.com/file/d/1S9CDXcDnjuwNG8Eaq6cG5EOcC_Bojqcw/view?usp=sharing) of student reports and a [well-written Tech Memo](https://drive.google.com/file/d/1wtEeyfcI0ObH-54Jn9V4pzgGdI38T4-9/view?usp=sharing) (c/o Prof. Spjut, don't mind the non-IEEE formatting).
+
+A rough draft of your final report is due at XX.
+The final draft is due at XX.
