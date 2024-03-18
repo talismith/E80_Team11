@@ -1,0 +1,203 @@
+---
+title: "Project"
+---
+
+# Field Deployment of an Autonomous Robot
+
+
+## Introduction
+
+The final project for this class is deploying your AUV in open water in order to complete an experiment of your design.  This project offers many opportunities for creativity: there are a wide variety of interesting things in the ocean that can be measured. For example, environmental or scientific quantities (e.g., water quality, distribution of temperature, salinity, turbidity) and observation of marine life are good options, as are engineering properties such as sensor accuracy, battery life, sensor or craft mechanical durability, velocity vs. power, controller accuracy, or measuring the structural strains that large motors apply to the robots.  Get creative! We look forward to seeing what you come up with.
+
+*The minimum requirements of the project are as follows:*
+
+* Your robot must be autonomously deployed to take measurements without human intervention. 
+* The deployment must last at least one minute and the robot must actively control its position during this minute.
+* This deployment must end at a place where the robot can be recovered.
+* Your sensor package must be deployed on or from your AUV, either in the water or in the air.
+* Your sensor package must use at least three sensors with at least two unique electrical interfaces.
+* The IMU, GPS, and motor current sensors that are already installed on the robot do not count towards this requirement, but they may be used as part of your data collection and analysis.
+* Any sensors, including the ones you've installed or used as part of any of the labs, are fair game for this project. The extra-credit sections of labs are a good source for sensors.
+
+This project is structured as a set of cumulative deliverables which will help you gather data in time to complete the project. These deliverables are summarized below. Each deliverable requires that each team be checked off by two faculty members during your usual lab section. The details of what documentation or hardware demonstrations are required for the checkoff each week are included in the sections below. The team needs to check off with their section professor and a second professor. The second professors will be available for some portion of every afternoon and on Friday (Teams from sections 1 and 3 may check off with your 2 section professors). Be prepared for a rigorous design review at each checkoff.
+
+In addition to the extra credit sections in the labs, there is a set of [reference designs](/reference/) for sensors and equipment. Feel free to use them as the basis for your own sensors and equipment.
+There are also many [Arduino tutorials](https://www.arduino.cc/en/Guide/HomePage) and an [Elegoo User Guide](https://drive.google.com/open?id=1MFy9ROuSPmeJ3feRW6h6TlD_dwJaXK80) to help you get started with your hardware.
+
+Sensor deployments are intended to take place during weeks 4 and 5 of the project: Week 4 deployment will be at the Bernard Field Station's pHake Lake during your regular section time and week 5 deployment will be at the Dana Point Baby Beach on Saturday 4/22/2023.  
+
+After the deployments, students are responsible for a set of final deliverables: A rough draft of your final report is due at 11:59 PM on 4/28/23.  The final draft is due at 11:59 PM on 5/3/2023 (submission will be accepted on Sakai) and a final presentation on 5/3/2023. The requirements for the final deliverables are discussed below.
+
+
+## Week 1: Proposal and Design
+
+During the first lab section of your project you will need to produce a project proposal. The project proposal is made up of four parts: a budget indicating what you intend to buy for the project, a one-page maximum written description of your experiment, a detailed schematic showing how you will install your new sensors, and a mechanical drawing showing how you plan to mount or ruggedize the sensors for water submersion. Take a look at this [example proposal](https://drive.google.com/open?id=1MRynJcT4hXLgHcVIO9rsjBFQ6UUU_kM_) to see what we're looking for.
+
+You will need to price the sensors and mechanical parts (easiest online) in order to make an accurate budget.
+You are expected to have selected parts for your experiment before submitting the budget. 
+Selecting these parts will depend on your experimental design: does your motor have enough torque to overcome the surf? 
+Does your pressure sensor have the maximum ratings necessary to achieve the depth you desire? 
+Common vendors include [Digikey](http://www.digikey.com/), [McMaster-Carr](https://www.mcmaster.com/), [JameCo](http://www.jameco.com/), [SparkFun](https://www.sparkfun.com/), [AdaFruit](https://www.adafruit.com/) and many others. 
+The faculty will not approve any budgets greater than $50 (including taxes and shipping). Supplies in the E80 lab don't count towards your budget limit (and remember that there are some links to get you started on the final set of lecture slides and the section above). 
+Some of the supplies, notably speakers and microphones, are available for temporary checkout for prototyping but not for permanent installation.
+These supplies are cheap enough that we expect you to buy your own for permanent installation.
+
+The one-page description of your project should lay out your scientific and/or engineering goals and describe how your sensor system will help you meet those goals.
+There are a few specific points that it should address:
+
+
+* It should answer the question, "Why would anyone do this project?" or "Why should I care about your results?"
+* It should outline your hypothesis and what you're comparing it to: what is the _x_ of your experiment, what is the _y_ and what two _x_-_y_ curves are you comparing? If you need to cite literature to establish your scientific relationship, then don't forget you can access papers through Mudd's network.
+* It should state the sensors you are using and describe how they relate to your scientific goals. Will they require any exceptional mechanical, electrical or software design?
+* It should convince the reader that you considered a number of design alternatives when you picked your project. The minimum bar for doing this is including five two-line project descriptions for projects that you considered but did not pursue.
+* It should outline requests for specific launch times or locations for your robot. There are two locations we can launch in Dana Point: the public beach and the Ocean Institute pier. We have a limited number of launch slots on the pier: two teams can launch in each half hour slot from 8:30 a.m. to 2:30 p.m. If your scientific goals would benefit from a particular launch time slot or slots on the pier, then you should request those slots in this project description. If some time slots are oversubscribed, we will award them randomly.  We will prioritize giving every team that wants one a deployment off the pier over giving one team multiple deployments.  
+
+Your schematic should be detailed and thorough and show every wire, resistor, capacitor (don't forget bypass capacitors) and power source that you intend to connect in order to get your sensor signals onto your MTB.  You should consider the voltage swing each component will provide and carefully design your analog front end and power supply so that these voltages are appropriate for the Teensy. Annotating voltage swings on your schematic is a good way to keep track of these design choices. You will be asked about every component on your schematic, so be prepared to back up your decisions with calculations or reference designs from the datasheets.
+
+You may find the design files for the PCBs you will use helpful while coming up with your schematic, so they are linked below. The CAD files for each board are viewable using[ KiCAD](http://kicad.org/). 
+Also, consider re-reading the [Introduction to the E80 Motherboard](https://drive.google.com/file/d/18bMajGNwH1K2yHB1dQLZRx5eqrYiNQWA/view?usp=sharing) document from lab 1.
+
+
+* Motherboard ([schematic](https://drive.google.com/file/d/1pk_mORYsxhedKjjqzhMrxj9H5ZVH3zqp/view?usp=sharing), [layout](https://drive.google.com/file/d/1pmm8xwpyAHAL5YvwMIQma4W8DuV-MP31/view?usp=sharing), [CAD files](https://drive.google.com/file/d/1pi9WNW7WoIx80xgb_0LWSUyA-LMfp94Z/view?usp=sharing))
+* Protoboard ([schematic](https://drive.google.com/open?id=1pDpDoSiCln73AbEeGSCm-o7L3ETTjlG9), [layout](https://drive.google.com/open?id=1VT_N11I8Alo8cQPUag5moUuXnGed80gd), [CAD files](https://drive.google.com/open?id=1NZ2dgC0PsSTcEsx0r2AD4S_84Wv5dpuq))
+
+You used the motherboard in labs 1, 2 and 7, so you should be familiar with it. All of your new electronics will be assembled on a new board called the protoboard, which has been designed to resemble a breadboard. Note that there are special areas on the protoboard layout for voltage regulators; you have battery power available to your protoboard but no regulated voltage supplies, so you will need to use these areas to add voltage regulators. The screw holes on all of the boards are grounded. Connections from the motherboard to protoboard will be made with a ribbon cable as shown [here](https://drive.google.com/open?id=1f263XprRhunVb96iLlj4cgUdvQr9Ukla) and [here](https://drive.google.com/open?id=1CA02afMMaOq7no6tP6REE3O2E691qiza).
+
+Your mechanical drawings should indicate sensor locations and be sufficient to convince a skeptical professor that your intended mechanical modifications are physically possible. Include approximate calculations - mass, center of gravity, buoyancy, or torque for motors - where appropriate to justify that these modifications serve your experimental goals. Especially include calculations if you think a professor will challenge you on the feasibility of your modification. ("e.g.: Can you really submerge an air filled tank with THAT motor?") Be sure to look up datasheets for motors if necessary.
+
+**Remember, you have $50 per team to spend towards your project.**
+A few important notes on spending:
+
+1. All purchases must be approved by your section instructor, who will initial your purchase requests on the google spreadsheet. 
+2. You must make all purchases to be shipped to the Engineering Department.
+3. Once your section instructor has approved your purchase, the designated purchaser may use the online department form [New Purchase Order Request Form](https://www.hmc.edu/engineering/current-student-information/department-forms/) to make the purchase request.
+4. On the purchase request form, be sure to include your team number and section number.
+5. Plan for a relatively long lead time, around a week.
+6. On the purchase request form, put Professor Brake as the professor to approve the purchase request.
+7. DO NOT FORGET TAXES AND SHIPPING COSTS WHEN CONSIDERING YOUR BUDGET.
+
+Faculty use [this checklist](https://docs.google.com/document/d/1Mu6EBuRauOxylP87Po1xO1yij7hNZuAZ/edit?usp=share_link&ouid=105511935419108795487&rtpof=true&sd=true) when checking students off for this week, so feel free to review your proposal against that list.
+
+[This](https://docs.google.com/document/d/1GFiMnHU6a3s1lfkIgrtkm0pdCMTTkv7l/edit?usp=share_link&ouid=105511935419108795487&rtpof=true&sd=trueBuRauOxylP87Po1xO1yij7hNZuAZ/edit?usp=share_link&ouid=105511935419108795487&rtpof=true&sd=true) is the list of parts available to you.
+
+
+## Week 2: Breadboard Demonstration
+
+At the end of the second week of the project you must demonstrate a prototype of your sensors in communication with the Teensy on the motherboard (MTB). Attach the sensors to your MTB (possibly using a breadboard), write software to measure them and design a set of experiments which will allow a professor to observe your sensor's outputs for known values. Be mindful of your construction techniques: if you do a good job building your circuits this week then you will be ready for your deployments. If you do a bad job, then you will need to do confusing rebuilds. The more sensors you get working this week, the smoother next week will go.
+
+During your checkoff you will be expected to show your professor (preferably) a live demonstration or (if necessary) a set of slides which show your measured data.
+
+Here is a [PDF of the Week 2 check-off list](https://drive.google.com/file/d/1ceVcYtdJ0_ELad29IEuRvf-lKeLMVVRf/view?usp=sharing) that we will use to evaluate your circuits.
+
+
+## Week 3: PCB Solder and Test
+
+After you have tested all of your sensors (possibly breadboarded) and demonstrated that they work, you need to transfer them to the hardware that will go in your AUV. As discussed in Section 1 above, the available protoboards are PC boards that are laid out like two halves of a breadboard side by side to which you can solder parts. They connect to the motherboard through the multipin connectors and ribbon cable. They are usually the easiest way to ruggedly mount your components for use in your AUV. Consider carefully the proper ways to mount and waterproof so that your sensors function as desired. You do not need to complete your waterproofing and final assembly, but everything should be ruggedly mounted and you want to come as close to the final configuration as possible.
+
+Some helpful guidelines:
+
+* Parts like the bypass capacitors and assorted resistors should be soldered directly to the PCB. For more complex parts, such as 16-pin DIP op-amps, it may be wise to solder a socket in place and mount the part in the socket to facilitate replacing them if something goes wrong. 
+* Good wiring technique and tight layout will make your robot much more reliable and easier to debug. 
+* You should use stranded wire whenever the wire will be subject to flexure or bending during use, disassembly or reassembly. It is much less likely to break under strain than solid core wire. As a general rule, when connecting two points on the protoboard use solid wire, when connecting to anything off board, use stranded wire.
+* You may need to make penetrator bolts for this project stage. A method for applying marine epoxy to bolts that have been drilled out can be found [here](https://drive.google.com/file/d/0BwiB3SVueuOpc2JIeUl1Z3ktU2M/view?usp=sharing&resourcekey=0-3E2w3qqP6SJLheveTlKGJQ). Remember that marine epoxy needs to dry overnight, so making these bolts requires two days because epoxy is applied twice. Be sure epoxy always dries in a fume hood: staff can show you an appropriate hood to use. We use 1/4" holes for our penetrator bolts and we hold the undrilled bolts in vises while drilling out the central hole. We find that six wires is about the maximum that we can fit into one bolt before the epoxy starts failing. You will also need to drill holes for these penetrator bolts in your project box. Be sure to use 1/2" [step drill bits](https://www.amazon.com/Step-Drill-Bits/b?ie=UTF8&node=256287011) (which we have in our cupboards) to drill out the holes. Standard drill bits will result in ragged holes that are not watertight.
+* [Default_Robot.ino](https://github.com/HMC-E80/E80-SP2023/blob/main/Default_Robot/Default_Robot.ino), is a good starting point for integrating your sensors with the Teensy. It adds some implements a couple features: logging of the analog pins, an updated diagnostic display, improved GPS resolution, and a few header files that help keep things organized. Be sure to read the README because it contains a lot of information about the features and adjustable knobs in each file. The adjustments described in the README file are sufficient to cover most standard student projects.
+
+During your checkoff, you will be expected to explain to your professor how everything is intended to work, and (preferably) give your professor a live demonstration of data collection and display or (if necessary) display a set of slides which shows your measured data. The difference from Week 2 is that everything should be mounted, and not just breadboarded. You should be able to mount your electronics assembly in your box, power it from battery power, mount the box in your robot and demonstrate the ability to log data when it is in this configuration. Any mechanical modifications to the robot should be complete before the checkoff so that the instructors are verifying that your electronics assembly can be mounted inside of the final version of your robot.
+
+Here is a [PDF of the Week 3 check-off list](https://drive.google.com/file/d/1D4dGdl3dXKTcIKknPj-1_9rpzKQ1UMyt/view?usp=sharing) that we will use to evaluate your protoboards.
+
+
+## Week 4: First Field Deployment Data
+
+During the fourth week you need to demonstrate that your AUV is watertight and capable of autonomous operation by measuring field data with it. Because GPS reception in the tank room is poor we'll accept faked control loops or open loop control during tank room deployments. You are expected to test and (hopefully) launch your AUV at the pHake Lake at the Bernard Field Station during your regular section time. The main goal of these tests is to ensure that your sensors work in the field. The secondary goal is to evaluate your experimental data so you can make changes to ensure that you will be able to meet your experimental goals. Do not forget that seawater and lake water have very different salinities, conductivities, and densities. A neutrally buoyant AUV in pHake Lake will bob like a cork in the ocean.
+
+Remember that field deployments are often easier if you have a deployment checklist, so write one. Here is an [example deployment checklist](https://drive.google.com/open?id=1MWqGn4acs9HfsRtGSR8tZrp-E_IN6IH4). The intent is that this checklist will prevent mistakes during your deployment; you'll be thinking about enough things out in the field that you are very likely to forget about the details of the care and feeding of your sensor suite without a list to check against. 
+
+You will also submit an experimental plan. The plan must include the number of deployments you intend to do and the times and locations of those deployments. You should list the expected range of signals you expect to observe (based on theory or preliminary measurements) during the deployments. The document should show the planned robot trajectory for each deployment and discuss how the robot will be recovered (kayak, it comes back and we grab it, pool hook, etc.). 
+
+The main E80 Lab (Parsons B171) will be open from 12:30 pm - 1:00 pm this week so that you may retrieve your equipment. You must be at the [side gate](https://drive.google.com/file/d/1wdGyp2_50KINmBhqCJby9zoKUE3Mr1cf/view?usp=sharing) of Bernard Field Station by 1:15 pm; an instructor will meet the group at the gate at the start of your section.  The teaching team will be out at BFS. This is one of the two chances that you'll have to collect data in the field, and field data is required for your final report and presentation. 
+
+Tools and facilities will be available at BFS. A generator will be running power supplies, oscilloscopes, soldering irons, and other electronics. Multimeters and common hand tools will be available. Common supplies will be available too: heat shrink, glue, hot air guns, etc. A set of work tables will be set up beneath shaded tents. Sunscreen and water will be available during this deployment, but be sure you've eaten before you arrive. Faculty will announce a cancellation of the launch in the case of severe rain. Be sure to walk to the BFS gate in pairs and only cross at crosswalks.
+
+You should show slides containing analyzed data at your checkoff. Be sure to overlay data sets that should be compared against one another and include analytical models to compare against on your plots.
+
+NOTE: It is possible to increase the logging time of your robot by increasing the FILE_BLOCK_COUNT value in Logger.h. This can help you to log data during long deployments.
+
+
+## Week 5: Final Field Deployment Data
+
+The fifth week is your final chance to test and verify your deployment checklist and fix any flaws that were discovered at pHake Lake. You will have your regular section time to rebuild, retest, and modify your system to get more meaningful data by adjusting such things as amplifier gains and offsets, sampling rate, sensor location on the AUV, and deployment times of your sensor. You will not have access to pHake Lake, but you will have access to the water tank during the week.
+
+The final field deployment is on Saturday, 4/22/2023. We will take buses from Foothill Blvd just north of Parsons to Dana Point, leaving at 6:30 am sharp. If you miss the bus, you will have to find your own way to Dana Point.
+
+You must have your robot and any supplies that your group plans to bring with you in order to be ready to load the bus. Attendance will be taken to ensure that the bus doesn't leave anyone behind at the end of the day, so make sure you are counted in the morning and you tell us if you are leaving separately from the bus.
+
+Sunscreen, water and some snack/lunch food (pizza, granola bars, chips) will be provided. The same facilities as the lake deployment will be available. In addition, we will provide freshwater buckets and rice for recovering flooded robots.
+
+Faculty will announce a cancellation of the launch in the case of severe rain. The launch may be rescheduled for Sunday in that case.
+
+Videos have been recorded to give students a sense of the following environment characteristics:
+
+
+* Water outside the harbor: Exercise great care if you want to operate a robot here. Most AUVs will be trashed. Watch this [video](https://drive.google.com/file/d/0BwiB3SVueuOpV05GVWgtaV9tMFk/view?usp=sharing&resourcekey=0-01dqmgvU3OkorvewX5pyyw).
+* Currents close to docks: This [video](https://drive.google.com/file/d/0BwiB3SVueuOpUmVjWnM2RUZ6OWM/view?usp=sharing&resourcekey=0-Gw-EZ0-FcsKywoIa2LI3lA) shows the worst I saw. In this video, no motors are turned on.
+* Normal AUV navigation in the harbor: This [video](https://drive.google.com/file/d/0BwiB3SVueuOpa2oyTURlUVFmVkk/view?usp=sharing&resourcekey=0-3BT_e71MRrCcpbY7x37i3w) shows it is possible.
+* Water clarity: Get an idea of what you can see by watching this [video](https://drive.google.com/file/d/1D0d_-GQWR-jZdyS6DVEm35iIVWuAI0Vb/view?usp=sharing).
+
+Your deliverables are slides with updated data from your deployment, which you will share with your instructors during your checkoffs at Dana Point. You are not allowed to do any deployments after launch day, so use this week well!
+
+
+## Week 6: Data Analysis and Preparation for Report and Presentation
+
+There are no deliverables during the sixth week of the project, but professors will be available to help you analyze data from your robot deployments. The experiments that you may conduct are limited, and the spirit of the restrictions is that you may only conduct small, in-lab forensic experiments to figure out problems if things went wrong.  
+
+Specifically:
+
+* You may not take any measurements underwater; you're confined to "lab."
+* You may not build or measure new sensors: if it didn't work during a deployment then we're not interested in measurements from it.
+
+You should focus your efforts on analyzing your data and forensic analysis of failures in your sensors. If a small experiment would verify a forensic assumption or explain a quirk in your data, then you should feel free to carry it out. (For example, a team once needed to see how their measurements from an LED varied with angle, and they took their still functional sensor outside and waved it around to take that measurement.) When in doubt, ask an instructor. 
+
+Your report is due at the end of this week.
+
+
+## Final Presentation
+
+On presentation day you will give a fifteen-minute, in-person presentation followed by ten minutes of questions and answers. This presentation should be aimed at a technically competent audience with diverse training backgrounds that is unfamiliar with the details of your project. (e.g.: The audience is a group of professional engineers from different disciplines.)  You should imagine the presentation is being given to employers or peers at a conference, which means that you should hold yourself to high standards of professionalism: practice until the presentation is smooth and well-polished, think carefully about the story your visual aids are telling, ensure that the visual aids are readable and high quality, and dress in [traditional business](http://www.casualpower.com/business_casual_tips/biz_attire.html) or [business casual](http://www.wisegeek.org/what-is-meant-by-business-casual-dress.htm) clothing. Every member of the team should participate in the presentation.
+
+[Here](https://docs.google.com/document/d/1gkcIFf0QWzm_AHsSfehlXYAj7xqv3sbh/edit?usp=share_link&ouid=105511935419108795487&rtpof=true&sd=true) is the rubric.
+
+Successful presentations often include discussions of: 
+
+* Science and/or engineering goals
+* Sensors and mechanical modifications to achieve those goals
+* Design process and calculations
+* Pre-deployment modeling and expected measurements
+* Data processing
+* Comparisons between modeling and measured data
+* Interpretation of these results
+* Recommendations for future work
+
+The questions during the Q&A portion of your presentation will come from both the general technical audience and your instructors. They will range from straightforward to very detailed. Be sure to prepare by practicing fielding pointed questions and by cultivating a comprehensive understanding of your work. Preparing supplementary slides which you can deploy for common questions can help you during the Q&A.
+
+
+The presentation schedule is available [here](https://docs.google.com/document/d/1PCoDuY3R-H8rUWIGGK-2glUJ2HQdZG8_AiqCY1jNEt4/edit?usp=share_link).
+Please be at least ten minutes early to your presentation.  
+
+
+
+## Final Report
+
+Each team is responsible for submitting a report on their deployments in IEEE format. The report has a maximum length of ten pages including figures and appendices. Your purpose is to convey your experiments, your apparatus and your results. You should assume your audience is made of technical professionals of diverse backgrounds (i.e.: not all instructors of the course) who are unfamiliar with your specific project. You should write the report such that a reader could replicate your experiment and compare their results to yours. Note that this is a different audience than the video presentation. [This rubric](https://docs.google.com/document/d/1BHVDvYdrbAWmpzs2dTNIYQB6RqpNgbVk/edit?usp=share_link&ouid=105511935419108795487&rtpof=true&sd=true) is the rubric which will be used to grade the reports.   
+
+Here are a few tips for good report writing:
+
+* The main body is often most digestible if it is written in several sections. Which sections are included and the ordering of your will depend on the specifics of the experiment, but some common, important topics are provided in the modified rubric. If it is impossible to address every point in the modified rubric while staying inside the page limit then (1) make your writing more compact by using mathematical notation, tables or figures and (2) prioritize what is most important for your report. 
+* Be sure to follow the practices of scientific writing: use quantifiable descriptions instead of vague adjectives ("a 25% change" instead of a "a big change"), make sure all plots have labeled axes with units, make sure text in figures and tables is large enough to read, don't use the first person (including cheats like "the team did X") and minimize passive voice by making the experiment or artifact the subject of your sentences.
+* Make sure to do some pre-writing to organize your text. Decide what topics you want in the report and where you want to put them before you start writing. Don't talk about topics in the wrong sections or repeat yourself unnecessarily.
+* Don't forget that your writing style has a huge impact on how your work is received. Make a careful editing pass to be sure that each sentence says what you mean it to say. Then make a second editing pass for spelling, punctuation, common grammatical errors (especially tense mismatch, which is endemic), and gracefulness of language.
+
+Here are [some examples](https://drive.google.com/file/d/1S9CDXcDnjuwNG8Eaq6cG5EOcC_Bojqcw/view?usp=sharing) of student reports and a [well-written Tech Memo](https://drive.google.com/file/d/1wtEeyfcI0ObH-54Jn9V4pzgGdI38T4-9/view?usp=sharing) (c/o Prof. Spjut, don't mind the non-IEEE formatting).
+
+A rough draft of your final report is due at XX.
+The final draft is due at XX.

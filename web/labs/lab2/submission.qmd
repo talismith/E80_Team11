@@ -1,0 +1,111 @@
+---
+title: "Lab 2 Submission Sheet"
+toc: false
+format:
+  html: default
+  docx: default
+---
+
+Keep answers as short as possible while still meeting specifications. Submit as a PDF.
+
+## Section 1: What is one 'Teensy Unit'? 
+
+i.e.: How much has the Voltage input to the Teensy changed when the number reported by matlablogging.m increases by 1?  Include a graph of Teensy output vs. sample number, any other relevant measurement setup information or measurements, and calculations showing how you did your conversion from measured units to Teensy units.
+
+Effort Specification:
+
+- [ ] Includes a graph of data sampled from the Teensy
+- [ ] Includes information (an oscilloscope measurement, a multimeter measurement, or a detail of how the function generator is set up) that can be used to calibrate the vertical scale of the Teensy graph.
+- [ ] Some calculations present
+
+Complete Specification:
+
+- [ ] One sentence describing what happens to Teensy outputs when Teensy inputs are less than zero
+- [ ] One sentence explaining what point or points were used to calculate the Teensy unit.
+- [ ] Calculations are correct and yield the proper Teensy unit value.  
+
+{{< pagebreak >}}
+## Section 1: What is the sample rate of the Teensy running matlablogging.ino? 
+
+Effort Specification:
+1. Includes a graph of data sampled from the Teensy
+2. Includes information (an oscilloscope measurement or a detail of how the function generator is set up) that can be used to calibrate the horizontal scale of the Teensy graph.
+3. Some calculations present
+
+Complete Specification:
+1. Calculations are correct and yield the proper Teensy unit value.
+
+{{< pagebreak >}}
+## Sections 5: Fill in this table
+
+Fill in only one of the "Measured Output Voltage" columns for each measurement, whichever is appropriate to the instrument that you are using to measure.  If you are using the "Measured Output Voltage (Vpp)" column, then also convert that measured voltage to an RMS value in the Converted Output Voltage (Vrms) column.
+
+| Z1 & Z2 | Instrument | Predicted Output Voltage (Vrms) | Measured Output Voltage (Vrms) | Measured Output Voltage (Vpp) | Covnerted Output Voltage (Vrms) | Predicted Uncertainty Bounds (%) | Difference from Theory (%) |
+|--------|-------|--------|-------|------|------|--------|-------|
+| Z1=wire, Z2=open | Multimeter | | | | | | |
+| Z1=wire, Z2=open | 1x Scope Probe | | | | | | |
+| Z1=wire, Z2=open | 10x Scope Probe | | | | | | |
+| Z1=wire, Z2=open | Teensy | | | | | | |
+| Z1=10 $\Omega$, Z2=20 $\Omega$ | Multimeter | | | | | | | 
+| Z1=10 $\Omega$, Z2=20 $\Omega$ | Teensy | | | | | | | 
+| Z1=1 k$\Omega$, Z2=2 k$\Omega$ | Multimeter | | | | | | | 
+| Z1=1 k$\Omega$, Z2=2 k$\Omega$ | Teensy | | | | | | | 
+| Z1=100 k$\Omega$, Z2=200 k$\Omega$ | Multimeter | | | | | | | 
+| Z1=100 k$\Omega$, Z2=200 k$\Omega$ | 1x Scope Probe | | | | | | | 
+| Z1=100 k$\Omega$, Z2=200 k$\Omega$ | Teensy | | | | | | | 
+| Z1=10 M$\Omega$, Z2=20 M$\Omega$ | Multimeter | | | | | | | 
+| Z1=10 M$\Omega$, Z2=20 M$\Omega$ | 10x Scope Probe | | | | | | |
+
+Effort Specification:
+1. At least half of the measurements are filled in with plausible values.
+2. Measured values also have a corresponding predicted value that shows understanding of the divider equation.
+
+Complete Specification:
+1. All measurements are filled in with correct values
+2. Theoretical calculations correctly include loading effects and match measurements well. (i.e.: Predicted Output Voltage (Vrms) and Measured/Converted Output Voltage (Vrms) are within predicted error bounds of one another.)
+
+{{< pagebreak >}}
+## Section 5: Provide an example Uncertainty Calculation
+
+Provide example calculations showing how you calculated the predicted output voltage and the predicted uncertainty bounds of the case where Z1=10 M$\Omega$, Z2=20 M$\Omega$ and you measured the output with the Elenco.
+
+Effort Specification:
+1. Calculations show understanding of divider equations.
+2. Error propagation is used to find the uncertainty bounds.
+
+Complete Specification:
+1. Calculations additionally show understanding of loading effects and use correct instrument loads.
+
+{{< pagebreak >}}
+## Section 6: Fill in this table
+
+Each measurement will use only one of the "Measured Output Voltage" columns, whichever is appropriate to the instrument that you are using to measure.
+
+| Circuit | Instrument | Predicted Output Voltage (Vrms) | Measured Output Voltage (Vrms) | Measured Output Voltage (Vpp) | Predicted Output Voltage (Vrms) | Predicted Uncertainty Bounds (%) | Difference from Theory (%) |
+|--------|-------|--------|-------|------|------|--------|-------|
+| Op-amp at input, Z1=10 $\Omega$, Z2=20 $\Omega$ | Multimeter | | | | | | | 
+| Op-amp at input, Z1=10 $\Omega$, Z2=20 $\Omega$ | Teensy | | | | | | | 
+| Op-amp at output, Z1=10 M$\Omega$, Z2=20 M$\Omega$ | Multimeter | | | | | | | 
+| Op-amp at output, Z1=10 M$\Omega$, Z2=20 M$\Omega$ | 10x Scope Probe | | | | | | |
+
+Effort Specification:
+1. At least half of the measurements are filled in with plausible values.
+2. Measured values also have a corresponding predicted value that shows understanding of the divider equation.
+
+Complete Specification:
+1. All measurements and calculations are filled in with correct values
+
+{{< pagebreak >}}
+## Section 6: Provide an Example Op-amp calculation
+
+Provide example calculations showing how you calculated the predicted output voltage and the predicted uncertainty bounds of the case where there is an op-amp at teh output, Z1=10 M$\Omega$, Z2=20 M$\Omega$ and you measured the output with the Elenco.
+
+Effort Specification:
+1. Some calculation is present that is theoretically appropriate.
+
+Complete Specification:
+1. Theoretical calculations additionally include a 1-2 sentence explanation of how the op-amp is affecting the calculation and measurement.  That explanation makes reference to appropriate op-amp input and output impedance properties.
+
+
+{{< pagebreak >}}
+## Extra Credit Writeups:

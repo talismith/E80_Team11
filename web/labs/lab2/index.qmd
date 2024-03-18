@@ -1,0 +1,195 @@
+---
+title: 'Lab 2: Basic Electrical Measurements'
+---
+
+**UNDER CONSTRUCTION, DO NOT USE FOR PRELAB**
+
+Team size: 2
+[Submission Sheet](/labs/lab2/submission.qmd) [Word](/labs/lab2/submission.docx)
+[Writing](/labs/lab2/writing.qmd)
+
+## Learning Objectives
+
+After successful completion of this lab, you will be able to...
+
+1. Use a multimeter, function generator, power supply, and oscilloscope.
+2. Describe what "instrument loading" means and explain why it happens.
+3. Build operational amplifier buffers to reduce instrument loading.
+4. Explain how to relate RMS voltages and amplitudes of sinusoidal voltage signals.
+5. Apply error propagation techniques to resistive voltage dividers to make uncertainty predictions in voltage measurements.
+
+
+## 0. Introduction
+
+In this lab you review the use of electrical test equipment, calculate the uncertainty in a measurement based on its components, and apply equivalent circuit models to understand instrument loading and op-amp buffers.  Electrical instruments and op-amps are used in every lab in this course, so we are doing this lab to build your toolkit for making experimental measurements.   Another goal of the lab is for you to practice error analysis and propagation.
+
+This lab will be completed in sub-teams of two students.  Before the lab you must decide how you will split your team. Two other labs (labs 3, 4 and 5) will also be completed as sub-teams, and you must use a different sub-team for each of these labs.  Each sub-team will be responsible for its own submission sheet. Pre-lab work may still be carried out with your whole team, but be sure each sub-team is ready to tackle the in-lab work independently.  Even though your team will be split into two sub-teams, you will only have access to one motherboard/Teensy assembly.  Plan your work carefully so that you share it equitably.
+
+ **For pre-lab purposes**, a sample submission sheet that contains all of the questions and requirements on the submission sheet is [here](https://docs.google.com/document/d/1i5vG08lq4HfAgMKqH7ONPxKtZEuw023A/edit?usp=sharing&ouid=100121681850908143159&rtpof=true&sd=true).  Writing software and processing simulated data sets is allowed and, in fact, encouraged during the pre-lab period. Two documents from previous iterations of E80 [Auntie Spark's Guide to breadboards](http://www.eng.hmc.edu/NewE80/PDFs/AuntieSparksGuideToBreadboarding.pdf) and [Uncle Sparky's guide to Voltage, Current, and Resistance Measurements](http://www.eng.hmc.edu/NewE80/PDFs/Uncle%20Sparky's%20Guide%20to%20Voltage%20Current%20and%20Resistance%20Measurement.pdf) are helpful prelab reads.
+
+
+## 1.  Logging Analog Data with the Teensy
+
+The Teensy contains an analog to digital converter which can measure analog signals on many of its pins. In this section you will take your first analog measurement with the Teensy. Teensy measurements will be used frequently in this lab and the next. Always connect to your Teensy pins through the E80 motherboard, which has protection circuits designed to prevent damage to the Teensy.  
+
+You will use two different pieces of software to log data from the Teensy in this section: A program on your Teensy (using Arduino code) which will sample data and a MATLAB program which will interpret serial data sent by your Teensy. These programs record input from input A0, which is identified on the silk screen on the back of your motherboard. Attach a wire to the empty hole on your motherboard which is connected to this pin (male-male jumper wires work OK) but DO NOT solder it in place. We will solder a header there later, and desoldering a wire will make that more difficult. You will also need a connection between your motherboard ground and your signal generator ground.
+
+Connect a  200 Hz, 1 Vpp, +0.4 V offset signal from a signal generator to the analog pin and run the following sketch on your Teensy: `matlablogging.ino`. 
+While matlablogging.ino is running and the Teensy is connected by USB, use `matlablogging.m` to receive a vector of data from the Teensy.  
+
+You may need to modify the function so that it points at the COM port which is correct for your Teensy. 
+The MATLAB program can't access your COM port if the Arduino serial monitor is open, so be sure that it is closed. 
+Sometimes COM ports get stuck in unusual states and MATLAB can't access them. Closing all of your programs will usually fix this problem. 
+
+What is the sample rate achieved by `matlablogging.ino`? 
+What is the relation between the values recorded by matlablogging.ino and the voltage applied to the pin? 
+(i.e.: how many volts is one "Teensy Unit"?)  
+What happens when the voltage on the Teensy pin is less than zero volts?
+
+Now change your input signal such that you are measuring a 175 kHz, 1 Vpp, +0.6 V offset signal. 
+What signal does your Teensy observe? Why? (Hint: you may need to think back to some parts of E79 to figure this one out.)
+
+FOR MACs:
+
+* The serial port (COM) can be found by going to Tools -> Ports in the Arduino IDE or by calling `ls /dev/` in the terminal and looking for a file of the form: `/dev/tty.XYZABCDEF`
+* In the matlablogging.ino file, if you don't see any output on the serial port, you may need to comment out these two lines and re-upload the program to the Teensy
+* while(!Serial.available()) {
+* Serial.println("Waiting..."); } 
+
+
+## 2. Instrumentation and Connectors
+
+Read the manuals of the:
+
+- [Teensy](https://www.pjrc.com/teensy/K20P64M50SF0.pdf)
+- [Elenco multimeter](http://www.eng.hmc.edu/NewE80/PDFs/Elenco_LCM-1950Manual.pdf), oscilloscope
+- ([Agilent 2024A](http://literature.cdn.keysight.com/litweb/pdf/75015-97045.pdf) and [spec sheet](http://literature.cdn.keysight.com/litweb/pdf/5990-6618EN.pdf))
+- Power supply: ([Keysight E3630A](http://literature.cdn.keysight.com/litweb/pdf/5968-9727EN.pdf?id=1000070544:epsg:dow)).
+
+
+Fill out the following information:
+
+1. Record the output impedance for the waveform generator on the oscilloscope, and the input impedances for the Elenco multimeter (both AC Volts and DC Volts), the Teensy analog pin and the oscilloscope. The impedance may not be called the impedance in the manuals. Ask the proctors or professors if you can't find them. For the power supply, record the maximum current out for each voltage range. Do not proceed with the rest of the lab until you have all of these values recorded correctly. You need this information for the rest of the lab.
+2. Record the accuracy or uncertainty of the measurements on the Teensy, Elenco multimeter, oscilloscope, and meter on the power supply and fill in the table on the submission sheet. Verify with a proctor or professor that you understand what the accuracy specifications mean, for example, what do rdg and dgt in ±(1.5% rdg + 1 dgt) mean? They most likely don't mean what you expect. Use these accuracies or uncertainties when reporting measured quantities throughout the lab.
+3. Turn on the power supply. Make sure TRACKING RATIO is on FIXED. Set the METER switch to +6 V. Adjust the +6 V knob until the meter reads 5 V. Set the Elenco to 40 V DC. With the Elenco measure (and record) the voltage between +6 V and COM, between +6 V and earth ground (the small symbol with diagonal lines on the bottom), and between COM and earth ground.  Explain your measurement results while answering the following questions (when in doubt ask a professor or proctor):
+    1. What does “COM” mean?
+    2. What does “earth ground” mean?
+    3. Would you ever connect “COM” and “earth ground” (a sketch may help)?
+    4. Would you ever NOT connect “COM” and “earth ground” (a sketch may help)?
+
+
+## 3. Output Load Setting of Signal Generators and Amplitude Measurements
+
+ The purpose of this section is to determine the purpose of the Output Load setting on the Oscilloscope Signal Generator and/or the OUT TERM setting on the signal generator. They both behave in exactly the same way, and when used incorrectly, you will find a factor of 2 or 1/2 in your measurements that you can't explain.  
+
+We strongly recommend that you use the function generator built into your oscilloscope but bench top signal generators are available in the electronics lab.
+
+Before you begin, make sure that the "Output Load" setting of your waveform generator is set to High-Z. Instructions adjusting the output load setting on both the oscilloscope and bench top signal generators are [here](https://docs.google.com/document/d/1dxD5BLERp5jU67nL9XBJaF959TPHSdrLRrk-XDM9qNc/edit?usp=sharing).  Set the frequency of your signal generator to 200 Hz, the amplitude to 0.6 Vpp, and the offset to 0.0 V.
+
+
+
+1. What is the amplitude of the sine wave as measured by the Teensy logging pin, Elenco, and oscilloscope? Did you have to do any calculations to convert the number reported by the instrument into an amplitude? You may have to review the differences between Vp, Vpp, and Vrms. Are the measurement accuracies within the manufacturer's specifications? 
+2. Do not adjust the amplitude (don't turn any of the knobs or push any of the buttons that affect amplitude), but reset "Output Load" to "50 Ω" or “OUT TERM” to “50 OHM,” record the Vpp displayed on the oscilloscope waveform generator or stand-alone function generator and repeat your measurements with the Elenco and ’scope. What are the relationships among the amplitude displayed on the waveform or function generator and the amplitude displayed by the meter and ’scope? 
+3. Measure and record the resistance of a 50 Ohm BNC Terminator. It should be close to the nominal 50 Ω. 
+4. Keep the waveform or function generator settings as those in question 2 of this section. Connect its output signal to a 50 Ohm BNC Terminator as [shown](https://drive.google.com/file/d/0B7Ols9Km9Pa1YnluZElUZFdRclk/view?usp=sharing&resourcekey=0-8fqPxsymKo0qo5he2RS_zw). A BNC Tee makes the connection trivial. Measure the voltage V0 across the terminator with the Elenco and 'scope. Explain the purpose of the "Output Load" or “OUT TERM” setting. Confirm your explanation with a professor or proctor.
+
+Be sure to set the output load of your signal generator back to High-Z before proceeding with the lab.
+
+
+## 4. Oscilloscope Probes
+
+In this section you will investigate the difference between 1X and 10X oscilloscope probes and explore why these probes might be used.  Unusually, we'll give you a hint at the answer: the output impedance of the oscilloscope probe forms a resistive divider with the input impedance of the oscilloscope itself.  Knowing this should make the calculations (with uncertainty) for questions 2, 3 and 4 easier.  
+
+As alluded to above, oscilloscope probes come typically with two settings: 1X and 10X. Oscilloscopes are designed to match these settings to make it easier to read out results, so oscilloscopes usually permit you to enter the setting of the probe you are currently using. For example, our oscilloscopes permit you to enter any setting (in a 2, 5, 10 order) from 0.1X to 100X. To enter the probe setting, push the channel button for the channel you're using, e.g., push the (1) button for channel 1. Then push the button below the Probe menu item. Rotate the settings knob until the desired setting is displayed and push the settings knob.
+
+We recommend you normally use the grayish probes kept in the drawer beneath the work surface. They are 10X probes and can't be set to any other setting. However, for this section, find one of the black probes that can be switched between 1X and 10X.
+
+
+
+1. Measure (don't just look it up) and record the DC impedance (the resistance) of the scope probes on both 1X and 10X settings (most easily accomplished by connecting the probe tip to the ground clip with a wire and connecting the probe BNC connector to a BNC Female to Double Banana Plug adaptor and then directly into the Elenco), and then answer questions 2 through 4. Don't measure the input impedance of the scope itself, recall you looked it up for Section 2.
+2. What is the input impedance of the scope (meaning the scope and probe together, not just the probe by itself) when the probe is on the 1X setting?
+3. What is the input impedance of the scope (meaning the scope and probe together, not just the probe by itself) when the probe is on the 10X setting?
+4. Does the 10X setting have any effect on the measured voltage? Why?
+
+Unless you have a _very _specific need to do something else, always make oscilloscope measurements with a 10X scope probe, and with the scope channel programmed to 10X probe mode. _Never_ use an oscilloscope probe to feed a signal from the signal generator (either on the oscilloscope or stand alone) to a circuit.
+
+
+## 5. Source and Load Impedance
+
+This section is to give you practice in accounting for both source and load impedances and for doing error propagation. Each component, such as a resistor, has an uncertainty specified by the manufacturer, such as ±1% for resistors and ±10% for capacitors. Each generating instrument or measurement instrument has a specified accuracy, which you looked up in Section 2. For the circuit shown [here](https://drive.google.com/file/d/0B7Ols9Km9Pa1d0xabmtQZlpLZms/view?usp=sharing&resourcekey=0-YWvxHN1wmqQoIBEpUox8kg), and for each of the values of Z1 and Z2 and the measuring instruments in the table [here](https://docs.google.com/document/d/1XyjMOSfLSAxeISbdkoIjHSgfmwIXOMNOndOAGM-aBbw/edit?usp=sharing), calculate the expected output voltages with confidence intervals accounting for both components and instruments. Assume the resistors are 5% resistors. Note that these analytical calculations can (and should) be made during prelab.  Now, build the actual circuit as (still) shown [here](https://drive.google.com/file/d/0B7Ols9Km9Pa1d0xabmtQZlpLZms/view?usp=sharing&resourcekey=0-YWvxHN1wmqQoIBEpUox8kg) on your own protoboard for each of the values of Z1 and Z2 in the table as (still) listed [here](https://docs.google.com/document/d/1XyjMOSfLSAxeISbdkoIjHSgfmwIXOMNOndOAGM-aBbw/edit?usp=sharing).  Measure and record each component value with uncertainty using the Elenco. Generate the input voltage using a signal generator and measure the  output voltage with each of the instruments in the table. Now redo the expected calculations using your measured component values. Explain any differences between your measured voltages and your two sets of predicted voltages. Do the measured voltages lie within the predicted confidence intervals? Are there any lessons here on how best to increase the accuracy of predicted measurements?
+
+You might find it convenient to build all the circuits at once, neatly on your protoboard, but be careful that you don't accidentally use the power busses to build a circuit that doesn't match this schematic.  Similarly, be sure you don't connect any outputs which should not be connected.  It is good practice to trim the resistors with wire cutters so that they lie neatly on the protoboard. 
+
+
+        Note: If Case (D) is giving you problems, try just twisting the components together and measuring things off of the protoboard. The leakage current is fairly high on the protoboard, and it may interfere with your measurements. 
+
+
+        Note: For Case (E) you may have to get creative with BNC adaptors and other components to make the circuits. A 10X probe will clearly not lie flat on a breadboard. 
+
+
+## 6. Op Amps and Impedance
+
+Read the "Op-amp Fundamentals" section at the bottom of this page and/or [Auntie Spark's Guide to Op-Amp Circuits](http://www.eng.hmc.edu/NewE80/PDFs/AuntieSparksGuideToOpAmpCircuits.pdf). 
+
+Replace the circuit in Case (A) of Section 5 on your breadboard with [this](https://drive.google.com/file/d/112zAzKTlFnLNu0iGhkG-0-ZmZYd9k822/view?usp=sharing) circuit and repeat your measurements. Power the op-amp with ±15 V.  Compare and contrast your results from Case (A) with your current results. What is the function of the op-amp in this measurement? 
+
+Replace the circuit in Case (D) of Section 5 on your breadboard with [this](https://drive.google.com/file/d/120NRFwKZS3b15vdk9vhQ_I2UELT95kO5/view?usp=sharing) circuit and repeat your measurements. Power the op-amp with ±15 V.  Compare and contrast your results from Case (D) with your current results. What is the function of the op-amp in this circuit? 
+
+
+## 7. Deliverables
+
+All labs require two submissions per group. The first submission is a submission sheet in which specific data must be shown. The submission sheet is due at the end of the 4-hour lab period. The submission sheet must be uploaded before the end of your lab session at 5:15 pm. Note that only ONE member of each team should access and submit the submission sheet. It is the responsibility of that team member to add the rest of the team’s names to the submission sheet. 
+
+For pre-lab purposes, a sample submission sheet that contains all of the questions and requirements on the submission sheet is[ here](https://docs.google.com/document/d/1i5vG08lq4HfAgMKqH7ONPxKtZEuw023A/edit?usp=sharing&ouid=100121681850908143159&rtpof=true&sd=true). 
+
+The second submission is a writing assignment, usually around 1 page in length. Each writing assignment will be based on a prompt, and must be completed by each student individually; no collaboration is allowed on the text or figures in these assignments, though you may speak among yourselves about concepts in keeping with the collaboration rules of the course. A first draft of the writing assignment must be uploaded by noon on Friday, and you need to bring a printed copy of your draft to the writing and reflection section on Friday at 1:15 pm. During the first hour of the writing and reflection, you will engage in a peer editing exercise. The second hour of the Writing and Reflection section is reserved for you to edit your draft to produce a final draft of the writing assignment. This final draft must be uploaded before the end of the Writing and Reflection section on Friday at 3:15 pm. The[ prompt](https://drive.google.com/file/d/1FRKQoeDmspXT7tTAlJB4JDjkD6xJi8T2/view?usp=sharing) and[ guided peer feedback worksheet](https://drive.google.com/open?id=1Bah6Xfwcps05_m5qhfMZkzPXmJfkOdhT) for Lab 2 are linked, note that the rubric is included in the prompt.
+
+Recall that no late work is accepted, we will grade whatever is submitted at the deadlines. Since multiple submissions are allowed, you may want to submit a less-than-perfect draft early as insurance against missing the deadline.
+
+After the writing and reflection section at the end of each week every person (not just one person per team) must submit a team dynamics check-in survey.  These are part of your participation grade.  The survey link can be found on the home page.
+
+
+## Extra Credit 1
+
+Replace Z2 in Case (C) of Section 5 on your breadboard with a 100kΩ thermistor and derive a formula to calculate the temperature from Vin and Vout. Also determine the error specifications for all of the components in your system. Measure Vin and Vout with the 10x Scope and calculate the room temperature from the measured Vin and Vout complete with propagation of errors to calculate the uncertainty. 
+
+Try to reduce your uncertainty by measuring the actual resistance of Z1 instead of using its printed value. Note that we're measuring Z1 because we are using the output voltage of the thermistor voltage divider to guess Z2. Repeat the measurement and calculation. How much did the uncertainty change? 
+
+Compare your calculated temperatures with the room temperature measured by one of the digital thermometers. Do the measurements agree within the uncertainty of the measurements? Why would you use the voltage divider circuit with a Teensy instead of simply measuring the resistance of the thermistor? In your answer you may want to explain how the Elenco measures resistance. For your circuit explore how the measured temperature changes with Vin as you vary from 1 Vpp to the maximum the signal generator can generate. Why does it change? 
+
+
+## Extra Credit 2
+
+How do the accuracies of the Teensy and Elenco vary as you adjust the input frequency to 100 Hz, 200 Hz, 500 Hz, 1000 Hz, 2000 Hz, 5000 Hz,10,000 Hz, 20,000 Hz, 50,000 Hz, and 100,000 Hz? Be sure you select appropriate input signals as you conduct this experiment. In particular, reflect on the Teensy's behavior in Section 1 and Section 3 when selecting the signal.  
+
+The definition of "accuracy" can be slippery here, so you should think carefully about it as you compose your answer. This is particularly true for the Teensy, which will return a sample to you that consists of many numbers. Will you consider the accuracy of a single data point (compared to what)? Of a single cycle? Or of some kind of aggregation of cycles that includes uncertainty? Consider carefully.
+
+Writeups for this extra credit section are not counted against the page limit of your report. You may submit this as an additional document labeled "Lab2 instrument frequency response extra credit addendum."
+
+
+## Extra Credit 3
+
+Connect the set of circuits in[ this](https://drive.google.com/open?id=1XyjMOSfLSAxeISbdkoIjHSgfmwIXOMNOndOAGM-aBbw) table (Circuits F through I) in the same manner as in Section 5.  Note that the Elenco can measure capacitance. Measure the output voltages with any appropriate equipment (justify your choice). Vary the input frequency as shown on the table.  Repeat the predictions and measurements as in Section 5.  Use an input amplitude of 5Vpp and, if using the Teensy, be sure to offset the signal.  Measure the phase difference between the input and output voltages where possible. Explain the results of your measurements and possible function for each circuit. Consider carefully in what (graphical) format(s) you want to present your results. 
+
+
+## Op-Amp Fundamentals 
+
+
+
+* Neatly laid out protoboards work better. Seriously, they do. They're easier to troubleshoot as well. Seriously, they are! Please take the time to do it right.
+* Keep your leads short and close to the board.
+* Strip off the minimum amount of insulation to let your patch wire work; Don't have big bare areas that can touch other things and short.
+* Trim your resistors and capacitors to keep the components close to the boards. Don't leave the leads long. Get the components down by the board.
+* Use the long busses for power only. Do use them for power and ground. Don't use them for signals. Use bypass capacitors (see below) on your power busses.
+* To the extent possible use coaxial cables to get signals on and off of your board. Put the input signals onto the board as close to the circuit inputs as possible. For example, use a coaxial cable with BNC connectors from the signal generator and then put spring-loaded mini-clips on the other end. Connect the mini clips to your circuit input and ground.
+* If you are using dual supplies for your op-amps, have three power busses: V+ connected to the +20 V output on your power supply, V– connected to the –20 V output on your power supply, and GND connected to the COM output on the power supply. You can adjust your supply voltage to be anything from ±1 V to ±15 V depending on what chips you are using.
+* If you are using a single supply for your op-amps, have two power busses: V+ connected to the +20 V output on your power supply, and GND connected to the COM output on the power supply. You can adjust your supply voltage to be anything from +1 V to +15 V depending on what chips you are using.
+* Color code your wiring. A common practice is to use red for V+ power, black for V– power, green for ground, and white or blue for signal lines. If you have a rat's nest of all red wires, neither the professors nor the proctors (nor you for that matter) will be able to figure out what goes where.
+
+In standard practice, op-amps are shown in schematics without the power connections. However, you must supply power to the power pins or the op-amps won't work! For reference,[ this](https://drive.google.com/file/d/0B7Ols9Km9Pa1NC1fSThWcW9wTjA/view?usp=sharing&resourcekey=0-hf94gUb3mJC3f1bfJYRjWQ) circuit shows the power connected to the op-amp.
+
+You may have noticed that the circuit has many capacitors connected to its power rails.  These are called decoupling or bypass capacitors and they help to stabilize (in a feedback sense) the operational amplifier. The high gain of operational amplifiers can cause op-amps to interact with long power busses to cause oscillations. This manifests as intermittent, large noise in the output of the circuit. You can almost totally eliminate this issue by placing bypass capacitors between the power supply pins and ground _as close as physically possible_ to each op-amp. 
+
+Standard practice recommends both a 10 µF electrolytic capacitor and a 0.1 µF standard capacitor. For E80 you can get away with just the 0.1 µF standard capacitor. If you use electrolytic capacitors, remember that they are polar and if you put them in backwards they won't work and may explode. 
+
+For dual supplies the capacitors run between V+ and ground, and V– and ground. For single-sided supplies, they run between V+ and ground. The circuit below shows a unity-gain buffer amp with dual power supplies and bypass capacitors.

@@ -1,0 +1,157 @@
+---
+title: "Lab 4: Temperature Sensors"
+---
+
+**UNDER CONSTRUCTION, DO NOT USE FOR PRELAB**
+
+Team size: 2
+
+## Learning Objectives
+
+After successful completion of this lab, you will be able to…
+
+1. Build a system to measure temperature with several different types of temperature sensors
+2. Explain the tradeoffs (e.g., response time, dynamic range, ease of analysis) between different temperature sensor architectures.
+
+
+## 0. Introduction
+
+**IT IS YOUR TEAM'S RESPONSIBILITY TO BRING ICE TO LAB .  THIS IS PART OF YOUR PRELAB! **
+
+This lab will be completed in sub-teams of two students. Before the lab you must decide how you will split your team.  Each sub-team will be responsible for its own version of the lab's deliverables.  Pre-lab work and a vision of the experiments that you will be conducting will be essential to the successful completion of this lab.  As usual, this subteam may not be the same as any other subteam you've participated in during the course.
+
+There are two extra credit sections. They would make the lab too long for most teams of two to complete. However, in the unlikely event that you complete the required sections, you may attempt either or both and include the results as addenda in your report and submission sheet (see details in the extra credit sections). They are the same experiments as extra credit for Lab 3. You may submit a given extra credit only once, so if you've already submitted one or the other, you may not resubmit it for Lab 4.
+
+The instructions for this lab are not as detailed as for some of the earlier labs. You are expected to plan out your experiments and fill in the blanks.
+
+You will be provided with: 
+
+
+
+* Temperature sensors
+* Digital thermometer
+* Hot water
+* A constant-temperature (25°C) water bath
+* Insulated containers
+* Glass beakers
+* Breadboard
+* Keysight Infinivision oscilloscope (click [here](http://literature.cdn.keysight.com/litweb/pdf/75015-97045.pdf) for manual)
+* Keysight E3630A power supply (click [here](http://literature.cdn.keysight.com/litweb/pdf/5968-9727EN.pdf?id=1000070544:epsg:dow) for manual)
+* Elenco multimeter (click [here](http://www.eng.hmc.edu/NewE80/PDFs/Elenco_LCM-1950Manual.pdf) for manual)
+* An AD623ANZ-ND Instrumentation Amplifier (click [here](http://www.analog.com/media/en/technical-documentation/data-sheets/AD623.pdf) for data sheet)
+* Access to resistors and capacitors in the stockroom and E80 lab.
+
+IMPORTANT SAFETY TIP: When using the calibration baths remember that water is an electrical conductor and putting an electronic component that is not waterproofed into water carries some risk. Use appropriate precautions. Waterproofing your sensors using electrical tape,heat-shrink tubing, hot glue or parafilm is essential!  
+
+IMPORTANT SAFETY TIP: Water above 50 °C can cause scalds. Determine safety protocols for working with hot water to avoid spilling it or inadvertently touching it.  
+
+IMPORTANT NOTE: The only constant-temperature bath in the lab is the 25 °C bath in the E80 lab (B171). Use your digital thermometer to monitor the temperatures of any other baths in the lab!  
+
+For pre-lab purposes, a sample submission sheet that contains all of the questions and requirements on the submission sheet is [here](https://docs.google.com/document/d/1ghNbwWHYMGdRQ9Xtn_HUUuJy1QP-dyQK/edit?usp=sharing&ouid=100121681850908143159&rtpof=true&sd=true).
+
+
+## 1. Side-by-Side Comparison of the Thermistor and Solid-State Sensor 
+
+You have used thermistors and integrated solid-state temperature sensors before in E79. In this section you will revisit those sensors and compare them.
+
+You will be given a 3-Pin TO-92 [MCP9701A](https://drive.google.com/open?id=1ZZ7An-GFcWQ5SsR5wrQlyf-qWexbjHdo) Low-Power Linear Active Thermistor Integrated Circuit. What is the voltage-temperature conversion given in the datasheet and what uncertainty does it have? (A tip for using the MCP701A: Solder wires onto each of the leads, but don't bend the sensor leads when soldering: bent leads are difficult to heat shrink.)
+
+You will be given a [Murata NXFT15WB473FA2B150](https://www.murata.com/en-us/api/pdfdownloadapi?cate=luNTCforTempeSenso&partno=NXFT15WB473FA2B150) thermistor. The equation for converting for temperature using the B parameter provided on the thermistor datasheet can be found on the Thermistor wikipedia page [here](https://en.wikipedia.org/wiki/Thermistor#B_or_%CE%B2_parameter_equation).
+
+How does the temperature conversion expression in the thermistor datasheet compare to [the Steinhart-Hart equation](https://drive.google.com/open?id=1M26d9SpbqibujobkYLoerNgt91uofynr), a power series which is used to describe thermistor Resistance vs. Temperature behavior? Why do you think the thermistor designers chose their conversion equation?
+
+A critical property of a temperature-measurement device is how quickly it responds to a change in external temperature. For most temperature-measurement devices, characterizing them as first-order systems is adequate for evaluating their suitability for a given application.
+
+
+
+1. Using the oscilloscope and resources that you have been provided, obtain the first-order temperature responses of the thermistor and the solid-state sensor SIMULTANEOUSLY. Determine the time constants of both temperature sensors. Note that the first-order response corresponds to the behavior of the sensors when the surrounding temperature changes suddenly.
+2. In a single plot, show Time-Temperature curves for both the thermistor and the temperature sensor. Specify the temperatures that were tested. Report appropriate measures of error in this plot. 
+3. Describe the circuitry you used to measure the thermistor resistance with your oscilloscope.
+
+
+## 2. Thermocouples
+
+Our available thermocouples are Type-E ([Omega FF-E-24-SLE-200](https://www.omega.com/en-us/search/?text=FF-E-24-SLE-200)). The NIST website with information on thermocouples is [here](https://srdata.nist.gov/its90/main/its90_main_page.html). The direct link to the NIST Type-E table is [here](https://srdata.nist.gov/its90/main/its90_main_page.html). The direct link to the NIST Type-E table is [here](https://srdata.nist.gov/its90/download/type_e.tab). The NIST page for polynomial coefficients that were used to generate the table (voltage from temperature) is [here](https://srdata.nist.gov/its90/type_e/ecoefficients.html). The NIST page for the inverse coefficients (temperature from voltage) is [here](https://srdata.nist.gov/its90/type_e/ecoefficients_inverse.html). The Omega website is [here](https://www.omega.com/en-us/). (Warning, Omega website is often very slow). The Omega version of the NIST table is [here](https://assets.omega.com/resources/z206.pdf). The Omega info on thermocouples is [here](https://it.omega.com/prodinfo/pdf/The-Thermocouple-Z-87-to-Z-92.pdf).
+
+Thermocouples generate very small voltages, which must normally be amplified to be read by an oscilloscope, although the DMM does have sufficient range. The easiest way to do the amplification is with an instrumentation amplifier. The one we have available is the Analog Devices AD623ANZ (data sheet [here](http://www.analog.com/media/en/technical-documentation/data-sheets/AD623.pdf)). Pay special attention to the voltage supply range. It can operate with a supply voltage range of ±2.5 V (or 0-to-5 V single sided) to ±6 V (or 0-to-12 V single sided). If you exceed the voltage supply range, you will destroy the chip. The op-amp standard of ±15 V will destroy it immediately. Don't be tempted. Figure 79 in the data sheet shows the basic circuit for connecting a thermocouple. Note that in Figure 79, the amplifier is powered with a bipolar, not a single-sided supply. It looks like an op-amp, but it is not. You should use a single sided power supply because your AUV will be powered by a battery. In this configuration you must offset your thermocouple to the average of your power supply (e.g., if you supply with 0-to-5 V, your thermocouple should be offset to 2.5 V). [This circuit](https://drive.google.com/file/d/1Juwm88NoYuYj1bjl3-nhzH4sVbncvE51/view?usp=share_link) is given to you for reference. Note that the offset utilizes a unity-gain, non-inverting Op-amp configuration to provide a low output impedance for the offset voltage.
+
+The simplest way to construct a thermocouple is to use one of the recycled ones. Otherwise, take a 1-foot length of thermocouple wire, strip the wires at one end and twist them firmly together so they make electrical contact. DO NOT USE SOLDER. It will not stick to the wires. 
+
+
+
+1. Use the multimeter to measure the output voltage of the thermocouple by itself. Determine the output voltage of the thermocouple at several temperatures and create a Temperature-Voltage curve. Make sure to record the ambient temperature (specifically the temperature at the thermocouple-multimeter junction) and place this information in the figure caption.
+
+Design and build a circuit to read a thermocouple using the ice bath method discussed in lecture (see Figure 6 of [this link,](https://it.omega.com/prodinfo/pdf/The-Thermocouple-Z-87-to-Z-92.pdf) or Figure 2 of [this link](http://circuitcellar.com/cc-blog/the-basics-of-thermocouples/), or click [here](https://drive.google.com/drive/folders/1xC09jM35sX2pIvMsqE0E8lO8F7CKePlt?usp=sharing)for lecture slides). DO NOT USE SOLDER. USE A GLASS BEAKER FOR YOUR ICE BATH. To get practice for your future data logger, design the circuit to have a gain of 200 and output voltages in the 0-to-5V range. Provide a detailed diagram of your circuit.
+
+
+
+1. Test your circuit at several different temperatures and create a Temperature-Voltage curve.
+2. How do your results compare to the Temperature-Voltage curve of the solid-state sensor and the thermistor? (As a reminder, you looked up the data necessary to find these two curves in Section 1. You don't need to measure temperature-voltage curves for the thermistor or solid-state sensor.)
+
+The AD623 is expensive ($7/chip), so return undamaged chips to stock.
+
+
+## 3. Side-by-Side Comparison of the Thermistor and Thermocouple with CJC
+
+You will not be using the ice bath method in this section! A complete thermocouple-based temperature measurement system requires cold junction compensation (CJC). You basically need a temperature sensor to measure the temperature of the junction where the thermocouple meets the instrumentation amplifier (the Cold Junction). In this lab, you will use the solid-state temperature sensor for CJC. To use CJC, measure the temperature of the cold junction with the MCP7901A (the Cold Junction sensor). Use the thermocouple table or polynomial to calculate the equivalent thermocouple voltage at that temperature. Then add your measured thermocouple voltage and your calculated voltage (the CJC voltage) together, and then convert the voltage sum to a temperature using the thermocouple table or polynomial. 
+
+
+
+1.  Use the solid-state sensor for CJC. Test your circuit by immersing the thermocouple in several different-temperature baths and create a Temperature-Voltage curve. How do your results compare with the curve from section 2?
+2. Using the oscilloscope and resources that you have been provided, obtain the first-order responses of the thermistor (the Murata part) and the thermocouple-with-CJC SIMULTANEOUSLY. How will you power and record data for three temperature sensors? Determine and compare the time constants of both temperature sensor systems. 
+3. In a single plot, show time-temperature step-response curves for the thermistor, the thermocouple with CJC, and the solid-state sensor (the MCP7901A). You may reuse data you took earlier, and you need not try to capture all three signals simultaneously, but you should time shift them so that the step responses all start at _t_ = 0. Be sure that the temperature and time axes are properly labeled with units. Thought Question: If you had to choose among these three systems to put on a submersible and record the data with a Teensy, which one(s) would you use?
+
+
+## 4. Deliverables
+
+All labs require two submissions per group. The first submission is a submission sheet in which specific data must be shown.  The submission sheet is due at the end of the 4-hour lab period and must be uploaded before the end of your lab session at 5:15 pm. Note that only ONE member of each team should access and submit the submission sheet. It is the responsibility of that team member to add the rest of the team’s names to the submission sheet. 
+
+**For pre-lab purposes**, a sample submission sheet that contains all of the questions and requirements on the submission sheet is [here](https://docs.google.com/document/d/1ghNbwWHYMGdRQ9Xtn_HUUuJy1QP-dyQK/edit?usp=sharing&ouid=100121681850908143159&rtpof=true&sd=true). 
+
+The second submission is a writing assignment, usually around 1 page in length. Each writing assignment will be based on a prompt, and must be completed by each student individually; no collaboration is allowed on the text or figures in these assignments, though you may speak among yourselves about concepts in keeping with the collaboration rules of the course. A first draft of the writing assignment must be uploaded by noon on Friday, and you need to bring a printed copy of your draft to the writing and reflection section on Friday at 1:15 p.m. During the first hour of the writing and reflection, you will engage in a peer editing exercise. The second hour of the Writing and Reflection section is reserved for you to edit your draft to produce a final draft of the writing assignment. This final draft must be uploaded before the end of the Writing and Reflection section on Friday at 3:15 p.m. Since multiple submissions are permitted, and only the last one is graded, you may want to submit a draft at 3 p.m. as insurance. The writing assignment is based on this [prompt](https://drive.google.com/file/d/18y0ytIowJyC8VtC2TysVzKX1j2Qhbnj7/view?usp=sharing).  
+
+This is the [peer feedback worksheet](https://drive.google.com/open?id=1Grr3FlIgdVPqD25AMcZX5I4gS5apYJ3i).  
+
+Note that you should include relevant calculations to explain the ideal analytical curves on your calibration plots on your submission sheet.
+
+Note that the rubric is included in the prompt.
+
+Recall that no late work is accepted, we will grade whatever is submitted at the deadlines.
+
+After the writing and reflection section at the end of each week every person (not just one person per team) must submit a team dynamics check-in survey. These are part of your participation grade. The survey link can be found on the home page.
+
+
+## Extra Credit 1. Salinity Measurement
+
+This extra credit is the same as for Lab 3. If you already submitted this extra credit for Lab 3, do not resubmit it as part of Lab 4.
+
+Salinity is a measure of the total dissolved salt content of water. It is an extremely important and common measurement in oceanographic studies. Salinity measurements are used to track the flow of water and map the hydrological cycle, calibrate acoustic communication links, and understand biological phenomena like algal blooms. In this section you will build a sensor to measure salinity using an inverting operational amplifier. You will prove that it works by calibrating it against saline solutions with different salinity.
+
+To design your sensor, you need to know reasonable values for what you're trying to measure. Your sensor will measure conductivity and the measured value will be used to extract salinity. Find the salinity and conductivity of the ocean using any resource you choose. Note that the equivalent circuit model of a saline solution whose value depends on the separation of the probe electrodes and the salt concentration (why?) is a resistor in parallel with a capacitor. We will ignore the capacitor for this extra credit section, but it is critically important in a design for the final project. You may want to read [this](https://drive.google.com/file/d/1wtEeyfcI0ObH-54Jn9V4pzgGdI38T4-9/view) reference for further information.
+
+Design an inverting operational amplifier circuit using one or more TL081 op-amps which has an output voltage that is linear with the conductivity of your solution. Be sure to consider source and load impedances when designing your circuit. Ensure that the output voltage of this circuit will vary over a wide voltage range for the range of saline solutions that you plan to use for calibrating your circuit. This design depends on some of your experimental parameters including the separation of electrodes and the conductivities of the solutions you intend to measure. 
+
+One thing to be careful of when measuring salinity is that salt, water and electrons will undergo chemical reactions which can deposit metal salts on your electrodes. These salts can form non-conductive films which stop your conductivity measurements. What kind of waveform should you apply to your circuit in order to make a measurement stable over time? This chemistry can also cause your circuit to fail if the electrode area is too small or the voltage applied to the solution is too low.
+
+Prepare an experimental setup that will allow you to measure the conductivity of salt water. You have access to beakers, wire, electrical tape and digital thermometers. Prepare a set of saline solutions to be used with this setup which are sufficient to prove the sensor is linear. Graduated cylinders would usually be used to measure the volume of water in these solutions. Those are not available to you, so instead you will need to use the digital scales and the well-known relationship between the mass and volume of water. What is that relationship? 
+
+Record a calibration curve for your sensor which plots the voltage output of your sensor against the concentration of your salt solution in units of grams per liter on logarithmic X and Y axes. Find a line of best fit including appropriate uncertainty measurements. Then use your sensor and your calibration curve to measure the salinity of the mystery salinity solution on the central table.
+
+Note: You may use [this](http://www.fivecreeks.org/monitor/sal.shtml) resource to convert from a measured conductivity to salinity and [this](https://www.hamzasreef.com/Contents/Calculators/SalinityConversion.php) resource to convert from salinity to conductivity.
+
+Writeups for this extra credit section are not counted against the page limit of your report.  You may submit this as an additional document labeled "Lab 4 salinity extra credit addendum."
+
+
+## Extra Credit 2. Pressure Measurement
+
+This extra credit is the same as for Lab 3. If you already submitted this extra credit for Lab 3, do not resubmit it as part of Lab 4.
+
+In this section you will replicate the pressure circuit on your E79 board to understand its operation.  After that you will modify the sensing circuit to optimize the range of the output voltage for the graduated cylinder test that we have used to test pressure sensor operation.
+
+Analyze [this](https://docs.google.com/drawings/d/1pTpKT0Fry4J3rTBcaDEpxpQXTKx3VQGQRzOxNTUFSZ4/edit?usp=sharing) circuit and select values of R1, R2 and R3 such that output voltage will swing from 1V to 4V when you apply a pressure varying from atmospheric to 50cm below water.  Implement the circuit using the [MPX5700](http://www.mouser.com/ds/2/302/MPX5700-783436.pdf) pressure sensor and the [MCP601](http://ww1.microchip.com/downloads/en/DeviceDoc/21314g.pdf) op-amp, which are the devices used on the E79 board.    Use Vdd=5V.  Why is the pressure sensor attached to the positive input of the amplifier?  
+
+Create an experimental setup to vary the pressure on the sensor using a large graduated cylinder, water and plastic tubing.  Create a calibration curve relating your measured voltage to the applied pressure, and include appropriate measures of uncertainty.
+
+Return the pressure sensor to stock when you are done with it under pain of a grade penalty, and be careful not to damage the pins while using it in your breadboard.
+
+Writeups for this extra credit section are not counted against the page limit of your report.  You may submit this as an additional document labeled "Lab 4 pressure extra credit addendum."
