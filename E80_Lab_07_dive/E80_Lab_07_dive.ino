@@ -54,6 +54,8 @@ volatile bool EF_States[NUM_FLAGS] = {1,1,1};
 
 void setup() {
   
+  delay(120000);
+
   logger.include(&imu);
   logger.include(&gps);
   logger.include(&xy_state_estimator);
@@ -74,10 +76,10 @@ void setup() {
   motor_driver.init();
   led.init();
 
-  int diveDelay = 2000; // how long robot will stay at depth waypoint before continuing (ms)
+  int diveDelay = 5000; // how long robot will stay at depth waypoint before continuing (ms)
 
-  const int num_depth_waypoints = 6;
-  double depth_waypoints [] = { 0.25, 0.5, 0.75, 1, 1.25, 1.5 };  // listed as z0,z1,... etc. (in meters)
+  const int num_depth_waypoints = 3;
+  double depth_waypoints [] = { 0.5, 1, 1.5 };  // listed as z0,z1,... etc.
   depth_control.init(num_depth_waypoints, depth_waypoints, diveDelay);
   
   xy_state_estimator.init(); 
@@ -103,7 +105,7 @@ void setup() {
 
 void loop() {
   currentTime=millis();
-    
+
   if ( currentTime-printer.lastExecutionTime > LOOP_PERIOD ) {
     printer.lastExecutionTime = currentTime;
     printer.printValue(0,adc.printSample());
