@@ -5,7 +5,7 @@ clear;
 clf;
 
 %% Pull correct .bin and .inf files
-filenum = '031'; % file number for the data you want to read
+filenum = '004'; % file number for the data you want to read
 infofile = strcat('INF', filenum, '.TXT');
 datafile = strcat('LOG', filenum, '.BIN');
 
@@ -49,7 +49,7 @@ fclose(fid);
 %% Thermistor data processing
 
 % Convert thermistor voltage data to temperatures using calibration curve
-vTherm = vpa(A01)/1024;
+vTherm = vpa(A01)*3.3/1024;
 tempTherm = zeros([length(vTherm),1]);
 
 for i = 1:length(vTherm)
@@ -67,7 +67,7 @@ mvNIST = [0.000, 0.059, 0.118, 0.176, 0.235, 0.294, 0.354, 0.413, 0.472, 0.532, 
 NIST = [tempNIST; mvNIST]';
 
 % Get reference temp from IC sensor
-vIC = vpa(A03)/1024;
+vIC = vpa(A03)*3.3/1024;
 tempIC = zeros([1,length(vIC)]);
 
 for i = 1:length(vIC)
@@ -76,13 +76,16 @@ end
 
 % Find the thermoelectric voltage of that temperature
 icNIST = zeros([1,length(vIC)]);
+counter = 1;
 for i = 1:length(vIC)
     icNIST(i) = NIST(round(tempIC(i))+1,2);
 end
- 
+
+% CAUTION BELOW HERE
+
 % Read in data (vector of voltages)
 
-vTcouple = vpa(A00)/1024;
+vTcouple = vpa(A00)*3.3/1024;
 
 % Get mV value read from the thermocouple to put into the NIST table
 mvTcouple = zeros([1,length(vIC)]);
@@ -90,7 +93,7 @@ for i = 1:length(vTcouple)
     mvTcouple(i) = ((vTcouple(i) - 2.5)/2001)*1000;
 end
 
-mvTot = mvTcouple + icNIST + 0.6650;
+mvTot = mvTcouple + icNIST; %+1 is to adjust for incorrect linear sensor, take out next time
 
 % Find which thermoelectric voltage our measured value is closest to in the NIST table
 index = zeros([1,length(vIC)]);
@@ -104,14 +107,16 @@ for i = 1:length(index)
     tempThermocouple(i) = NIST(index(i),1);
 end
 
+% CAUTION ABOVE HERE
+
 %% Pressure sensor data processing
 
 % Get depth from pressure
-vPressure = vpa(A02)/1024;
-depth = zeros([length(vPressure),1]);
+teensyPressure = vpa(A02);
+depth = zeros([length(teensyPressure),1]);
 
-for i = 1:length(vPressure)
-    depth(i) = 0.304*(vPressure(i)) + 0.328;
+for i = 1:length(teensyPressure)
+    depth(i) = 0.0103*(teensyPressure(i)) - 0.889;
 end
 
 %% Plotting
@@ -128,24 +133,24 @@ title("Temperature (C) vs. Sample number for Thermistor")
 
 subplot(2,1,2);
 plot(vTherm,tempTherm);
-xlabel("Voltage (mV)");
+xlabel("Voltage (V)");
 ylabel("Temperature (C)")
-title("Temperature (C) vs. Voltage (mv) for Thermistor")
+title("Temperature (C) vs. Voltage (V) for Thermistor")
 
 % Pressure plots
 figure(2)
 
 subplot(2,1,1)
-plot(vPressure,depth)
-xlabel("Voltage (UNIT)")
-ylabel("Depth (UNIT)")
-title("Depth (UNIT) vs. Voltage (UNIT)")
+plot(teensyPressure,depth)
+xlabel("Teensy Units")
+ylabel("Depth (m)")
+title("Depth (m) vs. Teensy Units")
 
 subplot(2,1,2)
 plot(sampNumVec,depth)
 xlabel("Sample number")
-ylabel("Depth (UNIT)")
-title("Depth (UNIT) vs. Sample number")
+ylabel("Depth (m)")
+title("Depth (m) vs. Sample number")
 
 % IC vs. Thermocouple (Box temp. vs outside temp.)
 figure(3)
