@@ -75,11 +75,11 @@ void setup() {
   gps.init(&GPS);
   motor_driver.init();
   led.init();
+ 
+  int diveDelay = 20000; // how long robot will stay at depth waypoint before continuing (ms)
 
-  int diveDelay = 5000; // how long robot will stay at depth waypoint before continuing (ms)
-
-  const int num_depth_waypoints = 3;
-  double depth_waypoints [] = { 0.5, 1, 1.5 };  // listed as z0,z1,... etc.
+  const int num_depth_waypoints = 4;
+  double depth_waypoints [] = {0.25, 0.5, 0.75, 1.0};  // listed as z0,z1,... etc.
   depth_control.init(num_depth_waypoints, depth_waypoints, diveDelay);
   
   xy_state_estimator.init(); 
