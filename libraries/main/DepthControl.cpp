@@ -115,6 +115,12 @@ void DepthControl::updatePoint(float z) {
       delayed = 1;
       changingWPMessage = "Got to depth waypoint " + String(currentWayPoint)
         + ", waiting until delay is over";
+        if(currentTime < delayStartTime + 2000){
+          motorstop = true;
+        }
+        else{
+          motorstop = false;
+        }
     }
     else {
       delayed = 0;

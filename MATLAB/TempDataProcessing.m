@@ -1,3 +1,6 @@
+% Team 11 Data Processing File
+% Contributers: Naomi Horiguchi '26, Tali Smith '26
+
 % TempDataProcessing.m
 % This script reads Teensy-collected data from an SD card and processes it.
 
@@ -5,7 +8,7 @@ clear;
 clf;
 
 %% Pull correct .bin and .inf files
-filenum = '004'; % file number for the data you want to read
+filenum = '021'; % file number for the data you want to read
 infofile = strcat('INF', filenum, '.TXT');
 datafile = strcat('LOG', filenum, '.BIN');
 
@@ -71,21 +74,23 @@ vIC = vpa(A03)*3.3/1024;
 tempIC = zeros([1,length(vIC)]);
 
 for i = 1:length(vIC)
-    tempIC(i) = (vIC(i) - 0.4)/0.0195;
+    tempIC(i) = vIC(i)*50.9-22.1;
 end
+
+%% UNCOMMENT IF YOU WANT TO ACCOUNT FOR THE IC SENSOR
 
 % Find the thermoelectric voltage of that temperature
-icNIST = zeros([1,length(vIC)]);
-counter = 1;
-for i = 1:length(vIC)
-    icNIST(i) = NIST(round(tempIC(i))+1,2);
-end
+% icNIST = zeros([1,length(vIC)]);
+% counter = 1;
+% for i = 1:length(vIC)
+%     icNIST(i) = NIST(round(tempIC(i))+1,2);
+% end
 
-% CAUTION BELOW HERE
+%% MORE THERMOCOUPLE DATA PROCESSING
 
 % Read in data (vector of voltages)
 
-vTcouple = vpa(A00)*3.3/1024;
+vTcouple = double(A00)*3.3/1024;
 
 % Get mV value read from the thermocouple to put into the NIST table
 mvTcouple = zeros([1,length(vIC)]);
@@ -93,21 +98,29 @@ for i = 1:length(vTcouple)
     mvTcouple(i) = ((vTcouple(i) - 2.5)/2001)*1000;
 end
 
-mvTot = mvTcouple + icNIST; %+1 is to adjust for incorrect linear sensor, take out next time
+icNIST = 1.373; % COMMENT OUT IF YOU ARE USING THE IC SENSOR PROCESSING LOOP ABOVE
+
+mvTot = mvTcouple + icNIST;
 
 % Find which thermoelectric voltage our measured value is closest to in the NIST table
-index = zeros([1,length(vIC)]);
-for i = 1:length(mvTot)
-    [m,k] = min(abs(mvNIST-mvTot(i)));
-    index(i) = k;
-end
 
 tempThermocouple = zeros([1,length(vIC)]);
-for i = 1:length(index)
-    tempThermocouple(i) = NIST(index(i),1);
+for i = 1:length(vIC)
+    tempThermocouple(i) = 16.7*mvTot(i) + 0.111;
 end
 
-% CAUTION ABOVE HERE
+%% LEGACY CODE, DO NOT UNCOMMENT
+
+% index = zeros([1,length(vIC)]);
+% for i = 1:length(mvTot)
+%     [m,k] = min(abs(mvNIST-mvTot(i)));
+%     index(i) = k;
+% end
+% 
+% tempThermocouple = zeros([1,length(vIC)]);
+% for i = 1:length(index)
+%     tempThermocouple(i) = NIST(index(i),1);
+% end
 
 %% Pressure sensor data processing
 
@@ -116,59 +129,124 @@ teensyPressure = vpa(A02);
 depth = zeros([length(teensyPressure),1]);
 
 for i = 1:length(teensyPressure)
-    depth(i) = 0.0103*(teensyPressure(i)) - 0.889;
+    depth(i) = 0.0103*(teensyPressure(i)) - 0.889 - 0.61;
 end
 
-%% Plotting
+%% Extra processing
+
+pwmIndex = find(~motorC)';
+
+for i = 1:(((length(pwmIndex)-mod(length(pwmIndex), 30))/30))
+    avThermocouple(i) = mean(tempThermocouple(pwmIndex(((i-1)*30)+1):pwmIndex(i*30)));
+    avThermistor(i) = mean(tempTherm(pwmIndex(((i-1)*30)+1):pwmIndex(i*30)));
+    sampMedian(i) = round(median(pwmIndex(((i-1)*30)+1):pwmIndex(i*30)));
+end
+
+%% Plotting 
 sampNumVec = 1:length(A00);
 
-%Thermistor plots
-figure(1)
+% %Thermistor plots
+% figure(1)
+% 
+% subplot(2,1,1);
+% plot(sampNumVec,tempTherm);
+% xlabel("Sample number");
+% ylabel("Temperature (C)");
+% title("Temperature (C) vs. Sample number for Thermistor")
+% 
+% subplot(2,1,2);
+% plot(vTherm,tempTherm);
+% xlabel("Voltage (V)");
+% ylabel("Temperature (C)")
+% title("Temperature (C) vs. Voltage (V) for Thermistor")
+% 
+% % Pressure plots
+% figure(2)
+% 
+% subplot(2,1,1)
+% plot(teensyPressure,depth)
+% xlabel("Teensy Units")
+% ylabel("Depth (m)")
+% title("Depth (m) vs. Teensy Units")
+% 
+% subplot(2,1,2)
+% plot(sampNumVec,depth)
+% xlabel("Sample number")
+% ylabel("Depth (m)")
+% title("Depth (m) vs. Sample number")
+% 
+% % IC vs. Thermocouple (Box temp. vs outside temp.)
+% figure(3)
+% 
+% plot(sampNumVec, tempIC)
+% xlabel("Sample number")
+% ylabel("Temperature (C)")
+% title("Temperature (C) vs. Sample number for IC")
+% 
+% % Thermistor vs. Thermocouple
+% figure(4)
+% 
+% plot(sampNumVec,tempTherm)
+% hold on
+% plot(sampNumVec,tempThermocouple)
+% hold on
+% xlabel("Sample Number")
+% ylabel("Temperature (C)")
+% title("Thermistor vs. Thermocouple")
 
-subplot(2,1,1);
-plot(sampNumVec,tempTherm);
-xlabel("Sample number");
-ylabel("Temperature (C)");
-title("Temperature (C) vs. Sample number for Thermistor")
+%% Plots for final report
 
-subplot(2,1,2);
-plot(vTherm,tempTherm);
-xlabel("Voltage (V)");
-ylabel("Temperature (C)")
-title("Temperature (C) vs. Voltage (V) for Thermistor")
+% Motor interference (File 014)
+figure(5)
 
-% Pressure plots
-figure(2)
-
-subplot(2,1,1)
-plot(teensyPressure,depth)
-xlabel("Teensy Units")
-ylabel("Depth (m)")
-title("Depth (m) vs. Teensy Units")
-
-subplot(2,1,2)
-plot(sampNumVec,depth)
-xlabel("Sample number")
-ylabel("Depth (m)")
-title("Depth (m) vs. Sample number")
-
-% IC vs. Thermocouple (Box temp. vs outside temp.)
-figure(3)
-
-plot(sampNumVec, tempIC)
-xlabel("Sample number")
-ylabel("Temperature (C)")
-title("Temperature (C) vs. Sample number for IC")
-
-% Thermistor vs. Thermocouple
-figure(4)
-
-plot(sampNumVec,tempTherm)
-hold on
-plot(sampNumVec,tempThermocouple)
-hold on
+yyaxis left
+plot(sampNumVec,tempThermocouple,'LineWidth',2)
 xlabel("Sample Number")
 ylabel("Temperature (C)")
-title("Thermistor vs. Thermocouple")
+yyaxis right
+plot(sampNumVec, motorC,'LineWidth',3)
+ylabel("PWM")
+title("Interference from Vertical Motor")
 
+% Depth/Thermistor Temperature Overlay (File 021)
+figure(6)
 
+yyaxis left
+plot(sampNumVec,tempTherm,'LineWidth',2)
+xlabel("Sample Number")
+ylabel("Temperature (C)")
+yyaxis right
+plot(sampNumVec, -depth,'LineWidth',2)
+ylabel("Depth (m)")
+title("Thermistor Change in Temperature over Time vs. Depth over Time")
+xlim([0, length(vIC)])
+
+% Thermistor vs. Depth (File 021)
+figure(7)
+
+p = polyfit(depth, tempTherm, 1);
+px = [min(depth) max(depth)];
+py = polyval(p, px);
+scatter(depth,tempTherm,14,"filled")
+hold on
+plot(px, py, 'LineWidth', 2)
+xlabel("Depth (m)")
+ylabel("Temperature(C)")
+title("Thermistor temperature (C) vs. Depth (m)")
+xlim([0, max(depth)])
+
+% Sinking behavior for File 021, Bobbing behavior for file 020 (CHANGE FILE # AND PLOT TITLE TO GO FROM ONE TO THE OTHER)
+figure(8)
+plot(sampNumVec,depth)
+xlabel("Sample Number")
+ylabel("Depth (m)")
+title("Depth (m) over Time: Sinking Behavior")
+
+% Thermocouple vs. Thermistor Discrete Points w/ Thermocouple with no Interference
+figure (9)
+scatter(depth(sampMedian), avThermocouple,"filled")
+hold on
+scatter(depth(sampMedian), avThermistor,"filled")
+xlabel("Depth (m)")
+ylabel("Temperature (C)")
+title("Temperature (C) vs. Depth (m) for Thermocouple")

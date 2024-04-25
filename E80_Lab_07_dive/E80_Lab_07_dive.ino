@@ -78,8 +78,8 @@ void setup() {
  
   int diveDelay = 20000; // how long robot will stay at depth waypoint before continuing (ms)
 
-  const int num_depth_waypoints = 4;
-  double depth_waypoints [] = {0.25, 0.5, 0.75, 1.0};  // listed as z0,z1,... etc.
+  const int num_depth_waypoints = 5;
+  double depth_waypoints [] = {0.5, 0.75, 1.0, 1.5, 2.0};  // listed as z0,z1,... etc.
   depth_control.init(num_depth_waypoints, depth_waypoints, diveDelay);
   
   xy_state_estimator.init(); 
@@ -134,7 +134,12 @@ void loop() {
         depth_control.diveState = false; 
         depth_control.surfaceState = true;
       }
-      motor_driver.drive(0,0,depth_control.uV);
+      if (!depth_control.motorstop){
+        motor_driver.drive(0,0,depth_control.uV);
+      } 
+      else{
+        motor_driver.drive(0,0,0);
+      }
     }
     if ( depth_control.surfaceState ) {     // SURFACE STATE //
       if ( !depth_control.atSurface ) { 
@@ -143,7 +148,12 @@ void loop() {
       else if ( depth_control.complete ) { 
         delete[] depth_control.wayPoints;   // destroy depth waypoint array from the Heap
       }
-      motor_driver.drive(0,0,depth_control.uV);
+      if (!depth_control.motorstop){
+        motor_driver.drive(0,0,depth_control.uV);
+      } 
+      else{
+        motor_driver.drive(0,0,0);
+      }
     }
   }
   
